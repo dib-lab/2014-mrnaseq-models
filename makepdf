@@ -1,0 +1,4 @@
+pdflatex rnaseq_paper.tex
+bibtex rnaseq_paper
+pdflatex rnaseq_paper.tex
+pdflatex rnaseq_paper.tex
