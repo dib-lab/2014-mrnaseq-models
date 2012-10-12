@@ -1,25 +1,19 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  11 JAN 2012 13:22
+This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2008.1.5)  12 OCT 2012 13:43
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**rnaseq_paper.tex
+**rnaseq_paper
 (./rnaseq_paper.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
-h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
- icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
-iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
- lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
-ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
-ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
-.
-(/usr/local/texlive/2011/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2011/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
+erman, danish, esperanto, spanish, catalan, galician, estonian, farsi, finnish,
+ french, greek, monogreek, ancientgreek, croatian, hungarian, interlingua, ibyc
+us, indonesian, icelandic, italian, latin, mongolian, dutch, norsk, polish, por
+tuguese, pinyin, romanian, russian, slovenian, uppersorbian, serbian, swedish, 
+turkish, ukenglish, ukrainian, loaded.
+(/usr/local/gwTeX/texmf.texlive/tex/latex/base/article.cls
+Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/local/gwTeX/texmf.texlive/tex/latex/base/size10.clo
+File: size10.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -33,24 +27,24 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsmath.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
@@ -91,82 +85,74 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2009/06/22 v3.00
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
 ))
-(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks19
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/gwTeX/texmf.texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2006/02/20 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+(/usr/local/gwTeX/texmf.texlive/tex/latex/config/graphics.cfg
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 90.
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
-)
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
-)
+(/usr/local/gwTeX/texmf.texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
 \Gread@gobject=\count99
 ))
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/cite/cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 373.
-Package: cite 2010/09/10  v 5.3
+(/usr/local/gwTeX/texmf.texlive/tex/latex/cite/cite.sty
+LaTeX Info: Redefining \cite on input line 149.
+LaTeX Info: Redefining \nocite on input line 214.
+Package: cite 2003/11/04  v 4.01
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg
+(/usr/local/gwTeX/texmf.texlive/tex/latex/config/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/setspace/setspace.sty
+(/usr/local/gwTeX/texmf.texlive/tex/latex/setspace/setspace.sty
 Package: setspace 2000/12/01 6.7 Contributed and Supported LaTeX2e package
 
 Package: `setspace' 6.7 <2000/12/01>
-) (/usr/local/texlive/2011/texmf-dist/tex/latex/multirow/multirow.sty
+) (/usr/local/gwTeX/texmf.texlive/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen114
 )
-(/usr/local/texlive/2011/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2010/01/09 v3.1m Customizing captions (AR)
+(/usr/local/gwTeX/texmf.texlive/tex/latex/caption/caption.sty
+Package: caption 2007/03/04 v3.0m Customising captions (AR)
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2010/01/14 v3.1m caption3 kernel (AR)
+(/usr/local/gwTeX/texmf.texlive/tex/latex/caption/caption3.sty
+Package: caption3 2007/03/04 v3.0m caption3 kernel (AR)
+\caption@keydepth=\count100
 \captionmargin=\dimen115
-\captionmargin@=\dimen116
+\captionmarginx=\dimen116
 \captionwidth=\dimen117
-\caption@indent=\dimen118
-\caption@parindent=\dimen119
-\caption@hangindent=\dimen120
-)
-\c@ContinuedFloat=\count100
-)
+\captionindent=\dimen118
+\captionparindent=\dimen119
+\captionhangindent=\dimen120
+))
 (./rnaseq_paper.aux)
 \openout1 = `rnaseq_paper.aux'.
 
@@ -183,237 +169,160 @@ LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 
-(/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
+(/usr/local/gwTeX/texmf.texlive/tex/context/base/supp-pdf.tex
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count101
 \scratchdimen=\dimen121
 \scratchbox=\box28
 \nofMPsegments=\count102
 \nofMParguments=\count103
-\everyMPshowfont=\toks20
 \MPscratchCnt=\count104
 \MPscratchDim=\dimen122
 \MPnumerator=\count105
-\makeMPintoPDFobject=\count106
-\everyMPtoPDFconversion=\toks21
-) (/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
+\everyMPtoPDFconversion=\toks20
+) (/usr/local/gwTeX/texmf.texlive/tex/latex/ragged2e/ragged2e.sty
+Package: ragged2e 2003/03/25 v2.04 ragged2e Package (MS)
 
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
+(/usr/local/gwTeX/texmf.texlive/tex/latex/everysel/everysel.sty
+Package: everysel 1999/06/08 v1.03 EverySelectfont Package (MS)
+LaTeX Info: Redefining \selectfont on input line 125.
 )
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
+\CenteringLeftskip=\skip46
+\RaggedLeftLeftskip=\skip47
+\RaggedRightLeftskip=\skip48
+\CenteringRightskip=\skip49
+\RaggedLeftRightskip=\skip50
+\RaggedRightRightskip=\skip51
+\CenteringParfillskip=\skip52
+\RaggedLeftParfillskip=\skip53
+\RaggedRightParfillskip=\skip54
+\JustifyingParfillskip=\skip55
+\CenteringParindent=\skip56
+\RaggedLeftParindent=\skip57
+\RaggedRightParindent=\skip58
+\JustifyingParindent=\skip59
 )
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
-
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
-))
-(/usr/local/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
-
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
-
-(/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/local/texlive/2011/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for U+msa on input line 74.
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 74.
 
-(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(/usr/local/gwTeX/texmf.texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+) [1{/usr/local/gwTeX/texmf.local/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] [3] [4] [5]
-[6] [7] (./rnaseq_paper.bbl [8])
-<figure1.png, id=37, 677.53125pt x 312.16624pt>
-File: figure1.png Graphic file (type png)
- <use figure1.png>
-Package pdftex.def Info: figure1.png used on input line 315.
-(pdftex.def)             Requested size: 361.34999pt x 166.49524pt.
+] [2] [3] [4] [5] [6] [7]
+[8] [9] [10] (./rnaseq_paper.bbl [11] [12])
 
-<figure2.png, id=38, 677.53125pt x 305.14pt>
-File: figure2.png Graphic file (type png)
- <use figure2.png>
-Package pdftex.def Info: figure2.png used on input line 326.
-(pdftex.def)             Requested size: 361.34999pt x 162.74774pt.
+pdfTeX warning: pdflatex (file ./overall_pipeline.pdf): PDF inclusion: found PD
+F version <1.5>, but at most version <1.4> allowed
+<overall_pipeline.pdf, id=49, 521.95pt x 481.8pt>
+File: overall_pipeline.pdf Graphic file (type pdf)
+ <use overall_pipeline.pdf>
 
-<figure3a.png, id=39, 680.5425pt x 200.75pt>
-File: figure3a.png Graphic file (type png)
- <use figure3a.png>
-Package pdftex.def Info: figure3a.png used on input line 338.
-(pdftex.def)             Requested size: 361.34999pt x 106.59302pt.
+pdfTeX warning: pdflatex (file ./local_assembly.pdf): PDF inclusion: found PDF 
+version <1.5>, but at most version <1.4> allowed
+<local_assembly.pdf, id=50, 521.95pt x 321.2pt>
+File: local_assembly.pdf Graphic file (type pdf)
+ <use local_assembly.pdf>
 
-<figure3b.png, id=40, 661.47125pt x 324.21124pt>
-File: figure3b.png Graphic file (type png)
- <use figure3b.png>
-Package pdftex.def Info: figure3b.png used on input line 339.
-(pdftex.def)             Requested size: 361.34999pt x 177.10965pt.
+pdfTeX warning: pdflatex (file ./algorithm.pdf): PDF inclusion: found PDF versi
+on <1.5>, but at most version <1.4> allowed
+<algorithm.pdf, id=51, 642.4pt x 401.5pt>
+File: algorithm.pdf Graphic file (type pdf)
+ <use algorithm.pdf>
 
-<figure4.png, id=41, 684.5575pt x 305.14pt>
-File: figure4.png Graphic file (type png)
- <use figure4.png>
-Package pdftex.def Info: figure4.png used on input line 353.
-(pdftex.def)             Requested size: 361.34999pt x 161.07622pt.
+pdfTeX warning: pdflatex (file ./kmers-variance.pdf): PDF inclusion: found PDF 
+version <1.5>, but at most version <1.4> allowed
+<kmers-variance.pdf, id=52, 542.025pt x 331.2375pt>
+File: kmers-variance.pdf Graphic file (type pdf)
+ <use kmers-variance.pdf>
 
-<figure5.png, id=42, 686.565pt x 160.6pt>
-File: figure5.png Graphic file (type png)
- <use figure5.png>
-Package pdftex.def Info: figure5.png used on input line 363.
-(pdftex.def)             Requested size: 361.34999pt x 84.52455pt.
+pdfTeX warning: pdflatex (file ./global_vs_local.pdf): PDF inclusion: found PDF
+ version <1.5>, but at most version <1.4> allowed
+<global_vs_local.pdf, id=53, 542.025pt x 332.24126pt>
+File: global_vs_local.pdf Graphic file (type pdf)
 
-<figure6.png, id=43, 619.31375pt x 481.8pt>
-File: figure6.png Graphic file (type png)
- <use figure6.png>
-Package pdftex.def Info: figure6.png used on input line 373.
-(pdftex.def)             Requested size: 361.34999pt x 281.12772pt.
+<use global_vs_local.pdf>
+<isoforms_boxplot.pdf, id=54, 587.19376pt x 442.65375pt>
+File: isoforms_boxplot.pdf Graphic file (type pdf)
 
-<figure7.png, id=44, 627.34375pt x 476.78125pt>
-File: figure7.png Graphic file (type png)
- <use figure7.png>
-Package pdftex.def Info: figure7.png used on input line 383.
-(pdftex.def)             Requested size: 361.34999pt x 274.6345pt.
+<use isoforms_boxplot.pdf>
+<fragmented_transcripts.pdf, id=55, 542.025pt x 202.7575pt>
+File: fragmented_transcripts.pdf Graphic file (type pdf)
 
-<figure8.png, id=45, 607.26875pt x 459.7175pt>
-File: figure8.png Graphic file (type png)
- <use figure8.png>
-Package pdftex.def Info: figure8.png used on input line 393.
-(pdftex.def)             Requested size: 361.34999pt x 273.55284pt.
+<use fragmented_transcripts.pdf>
+<model_comparisons.pdf, id=56, 542.025pt x 433.62pt>
+File: model_comparisons.pdf Graphic file (type pdf)
 
-<figure9.png, id=46, 567.11874pt x 381.425pt>
-File: figure9.png Graphic file (type png)
- <use figure9.png>
-Package pdftex.def Info: figure9.png used on input line 403.
-(pdftex.def)             Requested size: 361.34999pt x 243.04027pt.
+<use model_comparisons.pdf> <long_utr.pdf, id=57, 542.025pt x 87.32625pt>
+File: long_utr.pdf Graphic file (type pdf)
 
-<figure10.png, id=47, 533.995pt x 385.44pt>
-File: figure10.png Graphic file (type png)
- <use figure10.png>
-Package pdftex.def Info: figure10.png used on input line 413.
-(pdftex.def)             Requested size: 361.34999pt x 260.83124pt.
+<use long_utr.pdf> <bitscore.pdf, id=58, 433.62pt x 289.08pt>
+File: bitscore.pdf Graphic file (type pdf)
 
-<figure11.png, id=48, 682.55pt x 191.71625pt>
-File: figure11.png Graphic file (type png)
- <use figure11.png>
-Package pdftex.def Info: figure11.png used on input line 424.
-(pdftex.def)             Requested size: 361.34999pt x 101.49796pt.
+<use bitscore.pdf> <cdf_single_splice.pdf, id=59, 433.62pt x 289.08pt>
+File: cdf_single_splice.pdf Graphic file (type pdf)
 
-<figure12.png, id=49, 691.58376pt x 222.8325pt>
-File: figure12.png Graphic file (type png)
- <use figure12.png>
-Package pdftex.def Info: figure12.png used on input line 425.
-(pdftex.def)             Requested size: 361.34999pt x 116.43118pt.
+<use cdf_single_splice.pdf> <asm-cufflinks.pdf, id=60, 542.025pt x 202.7575pt>
+File: asm-cufflinks.pdf Graphic file (type pdf)
 
-<figure13.png, id=50, 593.21625pt x 465.74pt>
-File: figure13.png Graphic file (type png)
- <use figure13.png>
-Package pdftex.def Info: figure13.png used on input line 435.
-(pdftex.def)             Requested size: 361.34999pt x 283.71011pt.
+<use asm-cufflinks.pdf>
 
-<figure14.png, id=51, 596.2275pt x 465.74pt>
-File: figure14.png Graphic file (type png)
- <use figure14.png>
-Package pdftex.def Info: figure14.png used on input line 445.
-(pdftex.def)             Requested size: 361.34999pt x 282.26747pt.
+pdfTeX warning: pdflatex (file ./alt_splice_site.pdf): PDF inclusion: found PDF
+ version <1.5>, but at most version <1.4> allowed
+<alt_splice_site.pdf, id=61, 542.025pt x 533.995pt>
+File: alt_splice_site.pdf Graphic file (type pdf)
+ <use alt_splice_site.pdf>
+[13] [14] [15 <./overall_pipeline.pdf
 
-<figure15.png, id=52, 595.22375pt x 464.73625pt>
-File: figure15.png Graphic file (type png)
- <use figure15.png>
-Package pdftex.def Info: figure15.png used on input line 446.
-(pdftex.def)             Requested size: 361.34999pt x 282.13425pt.
+pdfTeX warning: pdflatex (file ./overall_pipeline.pdf): PDF inclusion: Page Gro
+up detected which pdfTeX can't handle. Ignoring it.
+>] [16 <./local_assembly.pdf
 
+pdfTeX warning: pdflatex (file ./local_assembly.pdf): PDF inclusion: Page Group
+ detected which pdfTeX can't handle. Ignoring it.
+> <./algorithm.pdf
 
-LaTeX Warning: Float too large for page by 11.89384pt on input line 452.
+pdfTeX warning: pdflatex (file ./algorithm.pdf): PDF inclusion: Page Group dete
+cted which pdfTeX can't handle. Ignoring it.
+>] [17 <./kmers-variance.pdf
 
-<figure16.png, id=53, 590.205pt x 462.72874pt>
-File: figure16.png Graphic file (type png)
- <use figure16.png>
-Package pdftex.def Info: figure16.png used on input line 456.
-(pdftex.def)             Requested size: 361.34999pt x 283.3091pt.
+pdfTeX warning: pdflatex (file ./kmers-variance.pdf): PDF inclusion: Page Group
+ detected which pdfTeX can't handle. Ignoring it.
+> <./global_vs_local.pdf
 
-<figure17.png, id=54, 489.83pt x 295.1025pt>
-File: figure17.png Graphic file (type png)
- <use figure17.png>
-Package pdftex.def Info: figure17.png used on input line 466.
-(pdftex.def)             Requested size: 361.34999pt x 217.70148pt.
+pdfTeX warning: pdflatex (file ./global_vs_local.pdf): PDF inclusion: Page Grou
+p detected which pdfTeX can't handle. Ignoring it.
+>] [18 <./isoforms_boxplot.pdf> <./fragmented_transcripts.pdf>] [19 <./model_co
+mparisons.pdf> <./long_utr.pdf>] [20 <./bitscore.pdf> <./cdf_single_splice.pdf>
+] [21 <./asm-cufflinks.pdf>] [22 <./alt_splice_site.pdf
 
-<figure19.png, id=55, 449.68pt x 293.095pt>
-File: figure19.png Graphic file (type png)
- <use figure19.png>
-Package pdftex.def Info: figure19.png used on input line 476.
-(pdftex.def)             Requested size: 361.34999pt x 235.53175pt.
-
-<figure20.png, id=56, 777.90625pt x 395.4775pt>
-File: figure20.png Graphic file (type png)
- <use figure20.png>
-Package pdftex.def Info: figure20.png used on input line 486.
-(pdftex.def)             Requested size: 505.89pt x 257.19612pt.
-
-Overfull \hbox (50.64592pt too wide) in paragraph at lines 486--487
- [] 
- []
-
-[9] [10 <./figure1.png> <./figure2.png>] [11 <./figure3a.png> <./figure3b.png> 
-<./figure4.png>] [12 <./figure5.png> <./figure6.png>] [13 <./figure7.png>]
-[14 <./figure8.png>] [15 <./figure9.png> <./figure10.png>] [16 <./figure11.png>
- <./figure12.png> <./figure13.png>] [17 <./figure14.png> <./figure15.png>]
-[18 <./figure16.png> <./figure17.png>] [19 <./figure19.png>] [20 <./figure20.pn
-g>] [21] (./rnaseq_paper.aux) ) 
+pdfTeX warning: pdflatex (file ./alt_splice_site.pdf): PDF inclusion: Page Grou
+p detected which pdfTeX can't handle. Ignoring it.
+>] (./rnaseq_paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3598 strings out of 493633
- 52517 string characters out of 3143378
- 126473 words of memory out of 3000000
- 6820 multiletter control sequences out of 15000+200000
- 8375 words of font info for 32 fonts, out of 3000000 for 9000
- 831 hyphenation exceptions out of 8191
- 38i,9n,38p,469b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2011/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmti10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmti8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb>
-Output written on rnaseq_paper.pdf (21 pages, 1024135 bytes).
+ 2542 strings out of 94073
+ 35065 string characters out of 1163506
+ 2081311 words of memory out of 4532507
+ 5781 multiletter control sequences out of 10000+50000
+ 7724 words of font info for 30 fonts, out of 2000000 for 2000
+ 645 hyphenation exceptions out of 5000
+ 35i,9n,40p,409b,264s stack positions out of 5000i,500n,6000p,200000b,50000s
+</usr/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm
+/cmbx10.pfb></usr/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm/cmbx12.pfb><
+/usr/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm/cmmi10.pfb></usr/local/gw
+TeX/texmf.texlive/fonts/type1/bluesky/cm/cmmi7.pfb></usr/local/gwTeX/texmf.texl
+ive/fonts/type1/bluesky/cm/cmr10.pfb></usr/local/gwTeX/texmf.texlive/fonts/type
+1/bluesky/cm/cmr7.pfb></usr/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm/cm
+sy10.pfb></usr/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm/cmsy7.pfb></usr
+/local/gwTeX/texmf.texlive/fonts/type1/bluesky/cm/cmti10.pfb></usr/local/gwTeX/
+texmf.texlive/fonts/type1/bluesky/cm/cmtt10.pfb>
+Output written on rnaseq_paper.pdf (22 pages, 590324 bytes).
 PDF statistics:
- 134 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 101 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1441 PDF objects out of 1728 (max. 8388607)
+ 0 named destinations out of 1000 (max. 131072)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

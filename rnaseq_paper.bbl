@@ -13,17 +13,17 @@
   \textsc{Annotation:}\ #2\end{quotation}}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{Zerbino:2008vu}
-Zerbino D (2008) {Velvet: Algorithms for de novo short read assembly using de
-  Bruijn graphs}.
-\newblock Genome research .
-\bibAnnoteFile{Zerbino:2008vu}
+\bibitem{Wang:2008ea}
+Wang ET, Sandberg R, Luo S, Khrebtukova I, Zhang L, et~al. (2008) {Alternative
+  isoform regulation in human tissue transcriptomes}.
+\newblock Nature 456: 470--476.
+\bibAnnoteFile{Wang:2008ea}
 
-\bibitem{ucscGenomeBrowser}
-Kent W, Sugnet C, Furey T, Roskin K, Pringle T, et~al. (2002) {The human genome
-  browser at UCSC.}
-\newblock Genome research .
-\bibAnnoteFile{ucscGenomeBrowser}
+\bibitem{Trapnell:2009dp}
+Trapnell C, Pachter L, Salzberg SL (2009) {TopHat: discovering splice junctions
+  with RNA-Seq}.
+\newblock Bioinformatics (Oxford, England) 25: 1105--1111.
+\bibAnnoteFile{Trapnell:2009dp}
 
 \bibitem{Trapnell:2010kd}
 Trapnell C, Williams BA, Pertea G, Mortazavi A, Kwan G, et~al. (2010)
@@ -39,11 +39,36 @@ Grabherr MG, Haas BJ, Yassour M, Levin JZ, Thompson DA, et~al. (2011)
 \newblock Nature biotechnology 29: 644--652.
 \bibAnnoteFile{Grabherr:2011jb}
 
-\bibitem{Iseli:1999vd}
-Iseli C, Jongeneel C, Bucher P (1999) {ESTScan: a program for detecting,
-  evaluating, and reconstructing potential coding regions in EST sequences}.
-\newblock Proc Int Conf Intell Syst Mol Biol .
-\bibAnnoteFile{Iseli:1999vd}
+\bibitem{Robertson:2010ih}
+Robertson G, Schein J, Chiu R, Corbett R, Field M, et~al. (2010) {De novo
+  assembly and analysis of RNA-seq data}.
+\newblock Nature methods 7: 909--912.
+\bibAnnoteFile{Robertson:2010ih}
+
+\bibitem{Schulz:2012je}
+Schulz MH, Zerbino DR, Vingron M, Birney E (2012) {Oases: Robust de novo
+  RNA-seq assembly across the dynamic range of expression levels.}
+\newblock Bioinformatics (Oxford, England) .
+\bibAnnoteFile{Schulz:2012je}
+
+\bibitem{Simpson:2009iv}
+Simpson JT, Wong K, Jackman SD, Schein JE, Jones SJM, et~al. (2009) {ABySS: a
+  parallel assembler for short read sequence data.}
+\newblock Genome research 19: 1117--1123.
+\bibAnnoteFile{Simpson:2009iv}
+
+\bibitem{Zerbino:2008vu}
+Zerbino D (2008) {Velvet: Algorithms for de novo short read assembly using de
+  Bruijn graphs}.
+\newblock Genome research .
+\bibAnnoteFile{Zerbino:2008vu}
+
+\bibitem{Zerbino:2009jp}
+Zerbino DR, McEwen GK, Margulies EH, Birney E (2009) {Pebble and rock band:
+  heuristic resolution of repeats and scaffolding in the velvet short-read de
+  novo assembler}.
+\newblock PloS one 4: e8407.
+\bibAnnoteFile{Zerbino:2009jp}
 
 \bibitem{Langmead:2009fv}
 Langmead B, Trapnell C, Pop M, Salzberg SL (2009) {Ultrafast and
@@ -51,17 +76,32 @@ Langmead B, Trapnell C, Pop M, Salzberg SL (2009) {Ultrafast and
 \newblock Genome Biology 10: R25.
 \bibAnnoteFile{Langmead:2009fv}
 
-\bibitem{Trapnell:2009dp}
-Trapnell C, Pachter L, Salzberg SL (2009) {TopHat: discovering splice junctions
-  with RNA-Seq}.
-\newblock Bioinformatics (Oxford, England) 25: 1105--1111.
-\bibAnnoteFile{Trapnell:2009dp}
+\bibitem{Iseli:1999vd}
+Iseli C, Jongeneel C, Bucher P (1999) {ESTScan: a program for detecting,
+  evaluating, and reconstructing potential coding regions in EST sequences}.
+\newblock Proc Int Conf Intell Syst Mol Biol .
+\bibAnnoteFile{Iseli:1999vd}
 
-\bibitem{Wu:2005bl}
-Wu TD, Watanabe CK (2005) {GMAP: a genomic mapping and alignment program for
-  mRNA and EST sequences.}
-\newblock Bioinformatics (Oxford, England) 21: 1859--1875.
-\bibAnnoteFile{Wu:2005bl}
+\bibitem{seqclean}
+{SeqClean}.
+\newblock \urlprefix\url{http://compbio.dfci.harvard.edu/tgi/software/}.
+\bibAnnoteFile{seqclean}
+
+\bibitem{Li:2006hr}
+Li W, Godzik A (2006) {Cd-hit: a fast program for clustering and comparing
+  large sets of protein or nucleotide sequences.}
+\newblock Bioinformatics (Oxford, England) 22: 1658--1659.
+\bibAnnoteFile{Li:2006hr}
+
+\bibitem{Kent:2002tv}
+Kent W (2002) {BLAT---The BLAST-Like Alignment Tool}.
+\newblock Genome research .
+\bibAnnoteFile{Kent:2002tv}
+
+\bibitem{khmer}
+{Khmer: In memory k-mer counting}.
+\newblock \urlprefix\url{https://github.com/ged-lab/khmer}.
+\bibAnnoteFile{khmer}
 
 \bibitem{Tatusova:1999tz}
 Tatusova T (1999) {BLAST 2 Sequences, a new tool for comparing protein and
@@ -71,9 +111,15 @@ Tatusova T (1999) {BLAST 2 Sequences, a new tool for comparing protein and
 \bibAnnoteFile{Tatusova:1999tz}
 
 \bibitem{Li:2009vz}
-Li H, Handsaker B, Wysoker A, T F (2009) {The Sequence Alignment/Map format and
-  SAMtools}.
-\newblock {Bioinformatics} 25: 2078--9.
+Li H, Handsaker B, Wysoker A, Fennell T (2009) {The Sequence Alignment/Map
+  format and SAMtools}.
+\newblock {\ldots} .
 \bibAnnoteFile{Li:2009vz}
+
+\bibitem{pysam}
+{Pysam: Python interface for the SAM/BAM sequence alignment and mapping
+  format}.
+\newblock \urlprefix\url{http://code.google.com/p/pysam/}.
+\bibAnnoteFile{pysam}
 
 \end{thebibliography}
