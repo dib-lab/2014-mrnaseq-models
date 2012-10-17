@@ -148,6 +148,7 @@ Velvet and Oases using the same range of parameters as the global
 assembly, above.  While the local assemblies were considerably more
 computationally efficient, they lacked several thousand unique regions
 that were present in the global assembly
+% @CTB why are the global ones not included in the final gene models?
 (Table~\ref{unique_sequences_matched_mouse}); this is probably due to
 the incomplete nature of the current chicken genome assembly, which is
 lacking approximately 5\% of its true gene content (cite).
@@ -184,7 +185,7 @@ with Oases-M using a k-mer size of 27, and compared them with the
 unmerged transcripts.  We then cross-validated using publicly
 available ESTs, which were not used in our assembly.
 The results show that
-Oases-M and the unmerged assembly share about 95\% of the predicted,
+Oases-M and the unmerged assembly share about 95\% of the predicted
 splice junctions, with 5\% disjoint.  Of these 5\%,
 approximately 6\% of the Oases-M-specific splice junctions are
 independently supported by ESTs, while 19\% of the unmerged splice
@@ -216,6 +217,9 @@ merged global and local assemblies (Table~\ref{genes_transcripts}).
 
 Our pipeline predicts many gene models and isoforms after assembly.
 We validated these gene models in several different ways.  XX more!
+
+% @CTB discuss: single ended, short reads => difficult to construct
+% gene models.  How are isoforms assembled by oases, anyway!?
 
 \subsubsection*{The gene models include most reads}
 
@@ -269,7 +273,7 @@ splice junctions from spleen.
 
 We next compared the Gimme gene models to those produced by Cufflinks,
 another reference-based approach to building gene models from mRNAseq
-data\cite{Trapnell:2010kd}.  We also compared both methods to the ENSEMBL gene annotations,
+data\cite{Trapnell:2010kd}.  We also compared the results from both methods to the ENSEMBL gene annotations,
 which are produced by a pipeline that incorporates de novo gene
 prediction and homology-based approaches as well as expression data.
 
@@ -309,25 +313,29 @@ Cufflinks and ENSEMBL both.
 
 As shown above, Cufflinks and the assembly method detect a number of
 distinct but equally valid splice junctions, which suggests that we
-could obtain greater sensitivity by merging both sets of predictions.
+could obtain greater sensitivity to exon-exon junctions in our gene models by merging both sets of predictions.
 We therefore used Gimme to merge the Cufflinks and assembly gene
 models Table.~\ref{genes_transcripts}.  This resulted in a decreased
 number of total genes, suggesting that some fragmented genes were
 merged together to form more complete gene structures (e.g. see
 Fig.~\ref{cufflinks_asm}). The merged gene models recover 51\% and
-66\% of splice junctions from ESTs and ENSENBL respectively, which is
+66\% of splice junctions from ESTs and ENSEMBL respectively, which is
 10-15\% greater than that from corresponding unmerged gene models.
 % @CTB what about splice junctions etc??
 
+% @CTB Note that these results are, frankly, kind of stunning.  Discuss
+% spleen/immune system diversity.
+
 \subsubsection*{Validating chicken sequences by using mouse homologs}
 
-To validate our predicted isoforms, we extracted coding sequences from
-our gene models by using ESTScan\cite{Iseli:1999vd}.  ESTScan
+To validate our predicted isoforms, we extracted putative coding sequences from
+our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan
 successfully translated 22,488 of 27,732 (81.1\%) of our isoforms to
 protein sequences with 50 or more amino acids.  We then searched for
 homologous sequences in mouse ENSEMBL, and found that 17,620 (78.4\%)
 of our isoforms from 12,399 distinct genes match mouse proteins at a
 bit score of XXX.
+% @CTB
 Most of these matches have a bit-score/length ratio greater than 1,
 which indicates a good agreement between chicken and mouse proteins.
 % @CTB why so few match, really?
@@ -335,7 +343,7 @@ which indicates a good agreement between chicken and mouse proteins.
 % @CTB for discussion: what's surprising about all of this? so many
 % splice variants, etc?  Note we need to go over pickrell paper carefully.
 
-\subsection*{Leftover text}
+\section*{Leftover Results text}
 
 The program can merge all transcripts from multiple-kmers and predict
 a structure of full-length isoforms and genes.
@@ -349,7 +357,7 @@ Most transcripts include a large part of untranslated regions (UTRs), especially
 These regions are challenging to predict correctly solely from computational methods due to low degree of conservation [?].
 RNA-Seq-derived gene models are useful for studying variations within UTR regions, which may be involved in regulation of isoform expression\cite{} (Fig.~\ref{long_utr}).
 
-\section*{An overestimated number of genes and transcripts}
+\subsection*{An overestimated number of genes and transcripts}
 
 The number of genes from our pipeline might be overestimated due to
 fragmented transcripts.  In our datasets, read coverage is lower at
@@ -377,8 +385,6 @@ RNA-Seq-derived gene models are useful for studying variations within UTR region
 which may be involved in regulation of isoform expression (cite).
 Figure~\ref{alter_5utr} and figure~\ref{long_utr} shows an example of alternative
 $5'$UTRs and extended $3'$UTR respectively.
-
-\subsubsection{Cufflinks}
 
 \subsubsection*{Cufflinks}
 
@@ -419,35 +425,6 @@ To conclude, Cufflinks performs better than our pipeline for detecting
 both genes and splice junctions in Ensembl gene models.
 However, we found that our pipeline detects more splice junctions
 that are not in Ensembl but are supported by ESTs.
-
-\subsubsection*{Validating chicken sequences by using mouse homologs}
-
-To validate our predicted isoforms, we extracted coding sequences from
-our gene models by using ESTScan\cite{Iseli:1999vd}.  ESTScan
-successfully translated 22,488 of 27,732 (81.1\%) of our isoforms to
-protein sequences with 50 or more amino acids.  We then searched for
-homologous sequences in mouse ENSEMBL, and found that 17,620 (78.4\%)
-of our isoforms from 12,399 genes match mouse proteins.
-Most of these matches have a bit-score/length ratio greater than 1,
-which indicates a good agreement between chicken and mouse proteins.
-% @CTB why so few, really?
-
-\section*{An overestimated number of genes and transcripts}
-
-The number of genes from our pipeline might be overestimated due to
-fragmented transcripts.  In our datasets, read coverage is lower at
-the $5'$ end due to the method used to convert mRNA to cDNA in library
-preparation.  A bias of read coverage toward $3'$ end and low
-expression level result in fragmented transcripts as shown in
-Fig.~\ref{fragmented_transcripts}.  Moreover, spurious splice
-junctions due to duplication in genome sequence can lead to a large
-number of dubious isoforms. 
-
-In addition, parameters used in building gene models such as minimum
-exon/intron size determine how transcripts are merged together, which
-can increases or decreases the number of isoforms.  In this study, we
-adjust the parameters to enhance sensitivity of splice junctions
-detection that may result in overestimation of the number of isoforms.
 
 \subsubsection*{isoforms and mouse}
 
