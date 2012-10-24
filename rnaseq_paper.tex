@@ -576,16 +576,19 @@ Only a representative of each cluster is kept in gene models.
 \subsubsection*{Algorithm}
 
 A gene model can be represented as a splice graph composed of exons as nodes and introns as edges.
-However, transcripts of the same gene vary in size and structure depending on the expression level and a hash length number used in assembly.
+However, transcripts of the same gene vary in size and structure depending on the expression level
+and a hash length number used in assembly.
 Furthermore, incomplete exons and fragmented transcripts complicate the construction of a splice graph.
-In this study, we developed an algorithm that handles incomplete exons and fragmented transcripts and constructs a maximum assembly of gene models.
+In this study, we developed an algorithm that handles incomplete exons and fragmented transcripts
+and constructs a maximum assembly of gene models.
 
 The algorithm first builds an intron graph using introns as nodes.
-Each intron contains exons whose one of their splice sites perfectly match intron boundary.
+Each intron contains exons whose one of their splice sites perfectly match intron boundaries.
 Exons are considered incomplete and eliminated if they locate at the $3'$ or $5'$ end of the transcripts and
 they are not the largest exons (exon 3a and 3b in Fig.~\ref{algorithm}).
 Transcripts were then grouped into the same gene if they have at least one intron or exon in common.
-Then, a splice graph composed of exons is created and structures of isoforms are derived from traversing paths in the splice graph.
+Then, a splice graph composed of exons is created and structures of isoforms are derived from traversing
+paths in the splice graph.
 Gimme is open-source and available at \texttt{https://github.com/ged-lab/gimme}.
 
 \subsection*{Protein sequence translation}
