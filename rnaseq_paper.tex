@@ -102,28 +102,72 @@ This indicates that the pipeline can be used to facilitate splice variants detec
 \section*{Author Summary}
 
 \section*{Introduction}
-Until recently, studies of alternative splicing had been limited to a small number of genes and isoforms due to high-cost and low-throughput sequencing of expressed sequence tags (ESTs) and full-length cDNA libraries.  
-RNA sequencing (RNA-Seq) using the next-generation sequencing (NGS) has been used successfully in many studies to gain unprecedented insight into a complexity of transcriptomes.
-Novel isoforms have been identified based on reads mapped across known splice junctions or putative splice junctions from annotations.
-It has been estimated that, in human, $92-94$\% of multiexon genes undergo alternative splicing and different isoforms are expressed in different tissues\cite{Wang:2008ea}.
+Until recently, studies of alternative splicing had been limited to a small
+number of genes and isoforms due to high-cost and low-throughput sequencing
+of expressed sequence tags (ESTs) and full-length cDNA libraries.  
+RNA sequencing (RNA-Seq) using the next-generation sequencing (NGS) has been
+used successfully in many studies to gain unprecedented insight into a
+complexity of transcriptomes.
+It has been estimated that, in human, $92-94$\% of multiexon genes undergo alternative
+splicing and different isoforms are expressed in different tissues\cite{Wang:2008ea}.
 This suggests that even in human a large number of splice variants have not been explored.
 
-Sequences from RNA-Seq are very short (~75--250bp for Illumina reads); therefore, it is not feasible to assess gene
-and isoform expression without mapping reads to a reference annotation or construct a full-length transcript from
-\emph{de novo} assembly.
-Several softwares employing different approaches have been developed to reconstruct transcripts from short reads.
-Tophat\cite{Trapnell:2009dp} maps reads to a reference genome to identify exons and splice sites \emph{ab initio}.
-It first searches for known splie sites in a genome and then tries to map reads across splice juntions to identify exon junctions.
-Exon junctions can be used to build gene models by Cufflinks\cite{Trapnell:2010kd}.
-On the other hand, Trinity\cite{Grabherr:2011jb}, has been developed to assemble short reads \emph{de novo} to construct transcripts.
-Trans-Abyss\cite{Robertson:2010ih} and Oases\cite{Schulz:2012je} are an extension of Abyss\cite{Simpson:2009iv} and Velvet\cite{Zerbino:2008vu,Zerbino:2009jp} assembler that are designed to work with RNA-Seq data.
-These programs are comparable at identifying alternative splicing with a slightly different sensitivity and specificity.
-However, Oases with Oases-M has been shown to be superior than other \emph{de novo} assembler at discovering isoforms in human and mouse\cite{Schulz:2012je}.
+Since sequences from RNA-Seq (reads) are very short (~50--250bp for Illumina reads),
+it is not feasible to assess expression isoforms and their structures without mapping reads
+to a reference annotation or reconstructing a full-length transcript from short reads.
 
-In this study, we present a pipeline that uses Velvet and Oases assembler to discover alternative splicing in RNA-Seq data from chickens.
-We use a new technique called a local assembly that enhances sensitivity of alternative splicing detection of Oases.
-The results show that the pipeline can detect more isoforms than Oases-M and can detect isoforms not found by
-Cufflinks.
+Despite the small size of sequencing reads, several studies have detected
+novel splice junctions based on alignment of reads spanning across putative exons.
+To map reads across splice junctions, reads are split into two parts and mapped
+to the genome independently.
+A splice junction is then identified based on alignments of each half of a read
+that fall between two exons at exon-intron boundaries.
+With this approach, Wang \emph{et al.} have identified a large number of
+splice junctions that are not annotated from human cell lines.
+These novel splice sites include both canonical splie sites and non-canonical splice site.
+Approximately, $46\%-75\%$ of canonical splice sites are supported by ESTs.
+Splice junctions have different read coverage, which suggests that both highly
+and lowly expressed isoforms are not annotated.
+
+Pickrell \emph{et al.} have also identified more than 150,000 novel canonical splice junctions
+in lymphoblastoid cells using a similar approach.
+The study has also shown that the number of unannotated splice junctions varies among cells from
+different human tissues, which suggests tissue-specific expression of isoforms.
+A majority of unannotated isoforms found in both studies are from alternative splicing
+of annotated exons a small fraction of isoforms contain exons from intergenic or intronic region.
+
+Several tools have been developed not only to detect novel splice junctions but also to reconstruct
+full-length isoforms from short reads with or without gene annotations.
+Cufflinks\cite{Trapnell:2010kd} relies on splice junctions detected from Tophat\cite{Trapnell:2009dp},
+a read aligner that can align reads across putative exons, to reconstruct a full-length transcripts.
+Cufflinks was used to identified 12,712 novel isoforms, of which 7,395 ($58\%$) contain novel splice
+junctions in mouse myoblast cell lines.
+The mapping-based approach has been useful in both detecting splice junctions and isoforms.
+One downside of this approach is it relies heavily on a reference genome.
+Therefore, organisms lacking a genome or a high-quality one may not find this approach practical.
+This limitation can be circumvent by employing \emph{de novo} assembly approach.
+
+A number of \emph{de novo} assemblers have been used to reconstruct transcripts from RNA-Seq data in
+many studies.
+Trinity\cite{Grabherr:2011jb}, has successfully been used to reconstruct transcripts both yeast and mouse.
+It has also shown that Trinity detects unique sets of splice junctions when compared to annotated
+junctions and junctions detected by Cufflinks.
+This suggests that \emph{de novo} assembly approach is capabale of increasing sensitivity of detecting
+alternative isoforms.
+Trans-Abyss\cite{Robertson:2010ih} and Oases\cite{Schulz:2012je} are an extension
+of Abyss\cite{Simpson:2009iv} and Velvet\cite{Zerbino:2008vu,Zerbino:2009jp} assembler
+that are tuned to work with RNA-Seq data.
+These programs are comparable at reconstructing known and novel alternative isoforms with a slightly
+different sensitivity and specificity.
+However, Oases with Oases-M has been shown to be superior than other \emph{de novo}
+assembler at discovering isoforms in human and mouse\cite{Schulz:2012je}.
+
+In this study, we present a pipeline that uses Velvet and Oases assembler to
+reconstruct alternative isoforms in RNA-Seq data from chickens.
+We use a new technique called a local assembly that enhances sensitivity of
+alternative splicing detection of Oases.
+The results show that the pipeline can detect more isoforms than Oases-M and
+can detect isoforms not found by Cufflinks.
 
 % Results and Discussion can be combined.
 \section*{Results}
