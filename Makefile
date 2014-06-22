@@ -1,15 +1,14 @@
-all: rnaseq_paper.pdf
-sup: supplement.pdf
+all: paper supplement
 
 clean:
-	rm rnaseq_paper.pdf *.aux
+	rm paper.pdf *.aux
 	rm supplement.pdf
 
-rnaseq_paper.pdf: rnaseq_paper.tex
-	pdflatex rnaseq_paper
-	pdflatex rnaseq_paper
-	bibtex rnaseq_paper
-	pdflatex rnaseq_paper
+paper: paper.tex
+	pdflatex paper
+	pdflatex paper
+	bibtex paper
+	pdflatex paper
 
-supplement.pdf: supplement.tex
+supplement: supplement.tex
 	pdflatex supplement
