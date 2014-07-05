@@ -87,95 +87,117 @@ $\ast$ E-mail: ctb@msu.edu
 
 % Please keep the abstract between 250 and 300 words
 \section*{Abstract}
-Comparison of spliced reads and reference gene annotations has been successfully used to discover alternative
-splicing in model organisms. However, the method cannot be applied in organisms without high-quality reference genome and
-gene annotations. In this article, we introduce a pipeline, based on \emph{de novo} assembly, that constructs gene models with splice
-variants.
-The pipeline includes a new technique called local assembly that enhances the sensitivity of
-alternative splicing detection.
-We demonstrates that the pipeline detects many novel splice variants in RNA-Seq data from chicken spleens.
-Some of those splice variants; however, only detected by our pipeline and not Cufflinks.
-This indicates that the pipeline can be used to facilitate splice variants detection from RNA-Seq.
+Comparison of spliced reads and reference gene annotations has been
+successfully used to discover alternative splicing in model
+organisms. However, the method cannot be applied in organisms without
+high-quality reference genome and gene annotations. In this article,
+we introduce a pipeline, based on \emph{de novo} assembly, that
+constructs gene models with splice variants.  The pipeline uses a
+technique called local assembly that enhances the sensitivity of
+alternative splicing detection.  We demonstrate that the pipeline
+detects many novel splice variants in RNA-Seq data from chicken
+spleen.  Many of these splice variants; however, are only detected by our
+pipeline and not Cufflinks.  This indicates that the pipeline can be
+used to facilitate splice variant detection from RNA-Seq.
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLoS ONE authors please skip this step. 
 % Author Summary not valid for PLoS ONE submissions.   
+
+% @CTB: aren't some splice variants detected only by Cufflinks and not by
+% gimme, too?
+% @CTB: for me to check, do Tophat and cufflinks only detect canonical splice?
+% @CTB: ask Olga for references to single-cell splice stuff.
+
 \section*{Author Summary}
 
 \section*{Introduction}
-Until recently, studies of alternative splicing had been limited to a small
-number of genes and isoforms due to high-cost and low-throughput sequencing
-of expressed sequence tags (ESTs) and full-length cDNA libraries.  
-RNA sequencing (RNA-Seq) using the next-generation sequencing (NGS) has been
-used successfully in many studies to gain unprecedented insight into a
-complexity of transcriptomes.
-It has been estimated that, in human, $92-94$\% of multiexon genes undergo alternative
-splicing and different isoforms are expressed in different tissues\cite{Wang:2008ea}.
-This suggests that even in human a large number of splice variants have not been explored.
+
+Until recently, studies of alternative splicing have been limited to a
+small number of genes and isoforms due to high-cost and low-throughput
+sequencing of expressed sequence tags (ESTs) and full-length cDNA
+libraries.  RNA sequencing (RNA-Seq) using deep short-read sequencing
+has been used successfully in many studies to gain unprecedented
+insight into a complexity of transcriptomes.
+
+It has been estimated that, in human, $92-94$\% of multiexon genes
+undergo alternative splicing and different isoforms are expressed in
+different tissues\cite{Wang:2008ea}.  This suggests that even in human
+a large number of splice variants have not been explored.
 
 %Since sequences from RNA-Seq (reads) are very short (~50--250bp for Illumina reads),
 %it is nokt feasible to assess expression isoforms and their structures without mapping reads
 %to a reference annotation or reconstructing a full-length transcript from short reads.
 
-Despite the small size of sequencing reads, several studies have detected
-novel splice junctions based on alignment of reads spanning across putative exon junctions.
-To map reads across exon junctions, reads are split into two parts and each part is mapped
-to the genome independently.
-A splice junction is then identified based on alignments of each half of a read
-that fall between two exons at exon-intron boundaries.
-With this approach, Wang \emph{et al} have identified a large number of
-splice junctions that are not annotated from human cell lines (HUVEC and NHEK)\cite{Wang:2011jq}.
-These novel splice sites include both canonical and non-canonical splice sites.
-Approximately, $46\%-75\%$ of canonical splice sites are supported by ESTs.
-Novel splice junctions have different levels of read coverage suggesting that both high-
-and low-expressed isoforms are unannotated.
+Despite the small size of sequencing reads, several studies have
+detected novel splice junctions based on alignment of reads spanning
+across putative exon junctions.  To map reads across exon junctions,
+reads are split into two parts and each part is mapped to the genome
+independently (@cite).  A splice junction is then identified based on
+alignments of each half of a read that fall between two exons at
+exon-intron boundaries.  With this approach, Wang \emph{et al} have
+identified a large number of splice junctions that are not annotated
+from human cell lines (HUVEC and NHEK)\cite{Wang:2011jq}.  These novel
+splice sites include both canonical and non-canonical splice sites.
+Approximately, $46\%-75\%$ of canonical splice sites are supported by
+ESTs.  Novel splice junctions have different levels of read coverage
+suggesting that both high- and low-expressed isoforms are unannotated.
 
-Using a similar approach, Pickrell \emph{et al} identified more than 150,000 novel canonical splice junctions
-in lymphoblastoid cells.
-The study also shows that the number of unannotated splice junctions varies among cells from
-different human tissues, which suggests tissue-specific expression of isoforms\cite{Pickrell:2010gt}.
-A majority of unannotated isoforms found in both studies are from alternative splicing
-of annotated exons. Only a small fraction of isoforms contain exons from intergenic or
-intronic region.
+Using a similar approach, Pickrell \emph{et al} identified more than
+150,000 novel canonical splice junctions in lymphoblastoid cells.  The
+study also shows that the number of unannotated splice junctions
+varies among cells from different human tissues, which suggests
+tissue-specific expression of isoforms\cite{Pickrell:2010gt}.  A
+majority of unannotated isoforms found in both studies are from
+alternative splicing of annotated exons. Only a small fraction of
+isoforms contain previously unknown exons.
+% @CTB is this last point important?
 
-Several tools have been developed not only to detect novel splice junctions but also to reconstruct
-full-length isoforms from short reads without using gene annotations.
-These tools are especially useful for transcriptome analysis of organims with poor gene annotations.
-Cufflinks\cite{Trapnell:2010kd} relies on splice junctions detected from Tophat\cite{Trapnell:2009dp},
-a read aligner that can align reads across putative exon junctions, to reconstruct a full-length transcript.
-Cufflinks identified 12,712 novel isoforms, of which 7,395 ($58\%$) contain novel splice junctions in
-mouse myoblast cell lines.
-Guttman \emph{et al} used Scripture, a tool employing similar mapping-based approach, to reconstruct
-a full-length transcripts from mouse RNA-Seq data and discovered approximately 490 novel alternative
-isoforms in lincRNA loci, which are expressed in any of the three different cell types\cite{Guttman:2010io}.
+Several tools have been developed not only to detect novel splice
+junctions but also to reconstruct full-length isoforms from short
+reads without using prior gene annotations.  These tools are especially
+useful for transcriptome analysis of organims with incomplete gene
+annotations.  Cufflinks\cite{Trapnell:2010kd} relies on splice
+junctions detected from Tophat\cite{Trapnell:2009dp}, a read aligner
+that can align reads across putative exon junctions, to reconstruct a
+full-length transcript.  Cufflinks identified 12,712 novel isoforms,
+of which 7,395 ($58\%$) contain novel splice junctions in mouse
+myoblast cell lines.  Guttman \emph{et al} used Scripture, a tool
+employing similar mapping-based approach, to reconstruct a full-length
+transcripts from mouse RNA-Seq data and discovered approximately 490
+novel alternative isoforms in lincRNA loci, which are expressed in any
+of the three different cell types\cite{Guttman:2010io}.
 
-Although the mapping-based method has been useful in both detecting splice junctions and isoforms,
-it relies heavily on a reference genome.
-Hence, organisms lacking a genome or a high-quality one may not find this approach practical.
-This limitation can be overcome by \emph{de novo} assembly of short reads.
+Although these mapping-based methods have been useful in detecting
+both splice junctions and isoforms, they rely heavily on a reference
+genome.  Hence, it is not necessarily practical to apply these methods
+to organisms lacking a high-quality reference genome.  This limitation
+can be overcome by \emph{de novo} assembly of short reads.
 
-A number of \emph{de novo} assemblers have been used to reconstruct transcripts from RNA-Seq data in
-many studies.
-Trinity\cite{Grabherr:2011jb}, was successfully used to reconstruct transcripts from yeast and mouse datasets.
-It was also shown that Trinity detects a unique set of novel splice junctions not detected by Cufflinks
-or Scripture.
-This suggests that \emph{de novo} assembly approach is capabale of increasing sensitivity of detecting
+A number of \emph{de novo} assemblers have been used to reconstruct
+transcripts from RNA-Seq data in many studies.
+Trinity\cite{Grabherr:2011jb}, was successfully used to reconstruct
+transcripts from yeast and mouse datasets.  It was also shown that
+Trinity detects a unique set of novel splice junctions not detected by
+Cufflinks or Scripture.  This suggests that a \emph{de novo} assembly
+approach is capabale of increasing sensitivity of detecting
 alternative isoforms of a mapping-based method.
-Trans-Abyss\cite{Robertson:2010ih} and Oases\cite{Schulz:2012je} are an extension
-of Abyss\cite{Simpson:2009iv} and Velvet\cite{Zerbino:2008vu,Zerbino:2009jp} genome assembler
-that are tuned to work with RNA-Seq data.
-These assemblers are comparable at reconstructing existing and novel alternative isoforms with a slightly
-different sensitivity and specificity.
-However, Oases with Oases-M has been shown to be superior than other \emph{de novo}
-assemblers at discovering isoforms in human and mouse\cite{Schulz:2012je}.
+Trans-Abyss\cite{Robertson:2010ih} and Oases\cite{Schulz:2012je} are
+extensions of the Abyss\cite{Simpson:2009iv} and
+Velvet\cite{Zerbino:2008vu,Zerbino:2009jp} genome assemblers that are
+tuned to work with RNA-Seq data.  These assemblers are comparable at
+reconstructing existing and novel alternative isoforms with a slightly
+different sensitivity and specificity.  However, Oases with Oases-M
+has been shown to be superior than other \emph{de novo} assemblers at
+discovering isoforms in human and mouse\cite{Schulz:2012je}.
 
-In this study, we present a pipeline that uses Velvet and Oases assembler to
-reconstruct alternative isoforms in RNA-Seq data from chickens.
-We use a new technique called a local assembly that enhances sensitivity of
-alternative isoform detection of Oases.
-The results show that the pipeline can detect more isoforms than Oases-M and
-can detect isoforms not found by Cufflinks.
-We also showed that transcripts reconstructed from \emph{de novo} assembly and mapping-based approach can be
-merged to build more complete predicted gene models.
+In this study, we present a pipeline that uses {\em de novo} assembly
+to reconstruct alternative isoforms in RNA-Seq data from chickens.  We
+apply a technique we call ``local assembly'' that enhances the sensitivity
+of alternative isoform detection by Oases.  The results show that the
+pipeline can detect more isoforms than Oases-M and can detect isoforms
+not found by Cufflinks.  We also showed that transcripts reconstructed
+from \emph{de novo} assembly and mapping-based approach can be merged
+to build more complete gene models.
 
 % Results and Discussion can be combined.
 \section*{Results}
@@ -203,7 +225,7 @@ that were present in the global assembly
 % @CTB why are the global ones not included in the final gene models?
 (Table~\ref{unique_sequences_matched_mouse}); this is probably due to
 the incomplete nature of the current chicken genome assembly, which is
-lacking approximately 5\% of its true gene content (cite).
+lacking approximately 5\% of its true gene content (@cite).
 Interestingly, over a hundred regions were present {\em only} in the
 local assemblies, suggesting that the local assemblies might be
 recovering additional exons.  Significant numbers of unique regions
@@ -217,7 +239,7 @@ an example of different isoforms detected by the two assembly methods.
 % @CTB what happens if you ask how many unique regions there are not
 %   represented in the final gene models?
 
-% @CTB DISCSUSS the use of splice junctions for validity; transition
+% @CTB DISCUSS the use of splice junctions for validity; transition
 % from transcripts to splice junctions.
 
 \subsection*{Oases-M discards splice variants}
@@ -251,9 +273,9 @@ assembly is also missing some found by Oases-M.
 % @CTB does the math for table three work out here?
 % @CTB is Oases-M meant to work with non-oases-assembled transcripts? is it a general merging tool?
 
-\subsection*{Exon graphs can be used to reconstruct putative splice variants}
+\subsection*{Exon graphs can reconstruct putative splice variants}
 
-We developed an exon graph approach to construct gene models from
+We used an exon graph approach to construct gene models from
 alignments of transcripts against the genome.  Our approach,
 implemented in a software package called Gimme, merges transcripts and
 gene models based on overlapping exons using an exon-graph approach
@@ -279,13 +301,15 @@ We used bowtie to map single-end reads from the source datasets to the
 transcripts.  More than 80\% of the original reads could be aligned to
 the transcripts, demonstrating that we did not lose a significant
 amount of information during the merge process
-(Table~\ref{single-end_map}).  More importantly, we also mapped
+(Table~\ref{single-end_map}).
+% @CTB compared to what?
+More importantly, we also mapped
 paired-end reads from technical replicates to the same gene models,
 and found that more than 85\% of the paired-ends mapped concordantly
 the gene models (Table~\ref{paired-end_map}).  Most of the reads that
 did not map were either highly erroneous or contained low-complexity
 artifactual sequence that probably originated from sample processing
-and reverse transcription (cite).
+and reverse transcription (@cite).
 % @CTB do we have something we can cite for typical % mapping?  Maybe Trinity
 % paper?  How about a citation that suggests that there's a lot of crap
 % in mRNAseq?
@@ -308,26 +332,27 @@ have fewer than 4 spliced reads (Fig.~\ref{cdf_single_splice}).
 More than 99\% of our predicted splice junctions have a coverage
 of 4 or higher in our combined mRNAseq data sets, suggesting that they are
 real splice junctions.
-% @CTB I'm slightly bugged by this statement.  Are we right?
+% @CTB I'm slightly bugged by this statement.  Are we right?!
 
 \subsubsection*{Most splice junctions are independently supported}
 
 Of the 100,411 splice junctions in our gene models, 81,838 (81.50\%)
 are supported by ESTs or mRNAs from Genbank.  This is especially
 surprising since our mRNAseq data is from spleen, and most of the
-publicly available ESTs or mRNAs are from other tissues.  Note that this
-cross-validation suggests that the 18,573 novel splice junctions {\em not}
-seen in publicly available ESTs and mRNAs are also likely to be real
-splice junctions from spleen.
+publicly available ESTs or mRNAs are from other tissues.  Note that
+this cross-validation suggests that the 18,573 novel splice junctions
+{\em not} seen in publicly available ESTs and mRNAs are also likely to
+be real splice junctions from spleen.
 % @CTB supported by ESTs OR mRNAs, or ESTs AND mRNAs?  Surely the former?
 
 \subsubsection*{Our pipeline improves on existing reference-based approaches}
 
 We next compared the Gimme gene models to those produced by Cufflinks,
 another reference-based approach to building gene models from mRNAseq
-data\cite{Trapnell:2010kd}.  We also compared the results from both methods to the ENSEMBL gene annotations,
-which are produced by a pipeline that incorporates de novo gene
-prediction and homology-based approaches as well as expression data.
+data\cite{Trapnell:2010kd}.  We also compared the results from both
+methods to the ENSEMBL gene annotations, which are produced by a
+pipeline that incorporates de novo gene prediction and homology-based
+approaches as well as expression data (@cite).
 
 Cufflinks finds 109,641 splice junctions, and Gimme finds 100,411
 splice junctions.  88,289 of them are in common.  (Venn diagram.)
@@ -343,6 +368,7 @@ splice junctions from ESTs (99,755) or mRNAs (13,641).  Cufflinks and
 Gimme each recover about 10\% of these, with more than 2/3 of these
 recovered by both Cufflinks and Gimme.  This indicates that both Gimme
 and Cufflinks are equally adept at recovering novel splice junctions.
+
 % @CTB note this suggests that Cufflinks improved recovery for ENSEMBL
 % gene models is false...
 % @CTB what fraction of Cufflinks splice junctions are high coverage (4+)?
