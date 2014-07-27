@@ -80,6 +80,7 @@ C. Titus Brown$^{3,1 \ast}$
 \\
 \bf{2} Avian Disease and Oncology Laboratory, East Lansing, MI, USA.
 \\
+
 \bf{3} Department of Computer Science and Engineering, Michigan State University, East Lansing, MI, USA.
 \\
 $\ast$ E-mail: ctb@msu.edu
@@ -87,25 +88,35 @@ $\ast$ E-mail: ctb@msu.edu
 
 % Please keep the abstract between 250 and 300 words
 \section*{Abstract}
-Comparison of spliced reads and reference gene annotations has been
-successfully used to discover alternative splicing in model
-organisms. However, the method cannot be applied in organisms without
-high-quality reference genome and gene annotations. In this article,
-we introduce a pipeline, based on \emph{de novo} assembly, that
-constructs gene models with splice variants.  The pipeline uses a
-technique called local assembly that enhances the sensitivity of
-alternative splicing detection.  We demonstrate that the pipeline
-detects many novel splice variants in RNA-Seq data from chicken
-spleen.  Many of these splice variants; however, are only detected by our
-pipeline and not Cufflinks.  This indicates that the pipeline can be
-used to facilitate splice variant detection from RNA-Seq.
+Splice variants play an important role in biological systems especially in the
+immune system and the central nervous system. An expression profile of splice
+variants has been shown to be a better signature of some diseases than an
+overall gene expression profile~\cite{zhang2013isoform}. However, for most
+organisms, available gene models such as Ensembl may not include all splice
+variants expressed in RNA-Seq data. Reference-guided (e.g.
+Cufflinks~\cite{Trapnell:2010kd}) and de novo assembly (e.g.
+Velvet/Oases~\cite{Schulz:2012je}) methods are available for building gene
+models from RNA-Seq reads. However, we found that both types of method recovered
+distinct set of splice variants.  In this article, we introduce a pipeline that
+can combined transcripts from {\em de novo} assembly and other gene models to
+constructs gene models that include more splice variants. We also described a
+method called local assembly that we used to enhance the assembly of splice
+variants to recover splice variants not found by Cufflinks and {\em de novo}
+assembly.  Combination of Cufflinks gene models and transcripts from assembly
+include more splice variants, increasing sensitivity of alternative splicing
+study.
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLoS ONE authors please skip this step. 
 % Author Summary not valid for PLoS ONE submissions.   
 
 % @CTB: aren't some splice variants detected only by Cufflinks and not by
 % gimme, too?
+% @LP: yes
+
 % @CTB: for me to check, do Tophat and cufflinks only detect canonical splice?
+% @LP: the mechanism used for reads >45 bp detects three canonical splice sites
+% ab initio.
+
 % @CTB: ask Olga for references to single-cell splice stuff.
 
 \section*{Author Summary}
@@ -124,9 +135,10 @@ undergo alternative splicing and different isoforms are expressed in
 different tissues\cite{Wang:2008ea}.  This suggests that even in human
 a large number of splice variants have not been explored.
 
-%Since sequences from RNA-Seq (reads) are very short (~50--250bp for Illumina reads),
-%it is nokt feasible to assess expression isoforms and their structures without mapping reads
-%to a reference annotation or reconstructing a full-length transcript from short reads.
+%Since sequences from RNA-Seq (reads) are very short (~50--250bp for Illumina
+%reads), it is not feasible to assess expression isoforms and their structures
+%without mapping reads to a reference annotation or reconstructing a full-length
+%transcript from short reads.
 
 Despite the small size of sequencing reads, several studies have
 detected novel splice junctions based on alignment of reads spanning
@@ -142,14 +154,14 @@ Approximately, $46\%-75\%$ of canonical splice sites are supported by
 ESTs.  Novel splice junctions have different levels of read coverage
 suggesting that both high- and low-expressed isoforms are unannotated.
 
-Using a similar approach, Pickrell \emph{et al} identified more than
+Using a similar approach, Pickrell {\em et al} identified more than
 150,000 novel canonical splice junctions in lymphoblastoid cells.  The
 study also shows that the number of unannotated splice junctions
 varies among cells from different human tissues, which suggests
-tissue-specific expression of isoforms\cite{Pickrell:2010gt}.  A
-majority of unannotated isoforms found in both studies are from
-alternative splicing of annotated exons. Only a small fraction of
-isoforms contain previously unknown exons.
+tissue-specific expression of isoforms\cite{Pickrell:2010gt}. 
+% A majority of unannotated isoforms found in both studies are from alternative
+% splicing of annotated exons. Only a small fraction of isoforms contain
+% previously unknown exons.
 % @CTB is this last point important?
 
 Several tools have been developed not only to detect novel splice
@@ -161,7 +173,7 @@ junctions detected from Tophat\cite{Trapnell:2009dp}, a read aligner
 that can align reads across putative exon junctions, to reconstruct a
 full-length transcript.  Cufflinks identified 12,712 novel isoforms,
 of which 7,395 ($58\%$) contain novel splice junctions in mouse
-myoblast cell lines.  Guttman \emph{et al} used Scripture, a tool
+myoblast cell lines.  Guttman {\em et al} used Scripture, a tool
 employing similar mapping-based approach, to reconstruct a full-length
 transcripts from mouse RNA-Seq data and discovered approximately 490
 novel alternative isoforms in lincRNA loci, which are expressed in any
@@ -171,14 +183,14 @@ Although these mapping-based methods have been useful in detecting
 both splice junctions and isoforms, they rely heavily on a reference
 genome.  Hence, it is not necessarily practical to apply these methods
 to organisms lacking a high-quality reference genome.  This limitation
-can be overcome by \emph{de novo} assembly of short reads.
+can be overcome by {\em de novo} assembly of short reads.
 
-A number of \emph{de novo} assemblers have been used to reconstruct
+A number of {\em de novo} assemblers have been used to reconstruct
 transcripts from RNA-Seq data in many studies.
 Trinity\cite{Grabherr:2011jb}, was successfully used to reconstruct
 transcripts from yeast and mouse datasets.  It was also shown that
 Trinity detects a unique set of novel splice junctions not detected by
-Cufflinks or Scripture.  This suggests that a \emph{de novo} assembly
+Cufflinks or Scripture.  This suggests that a {\em de novo} assembly
 approach is capabale of increasing sensitivity of detecting
 alternative isoforms of a mapping-based method.
 Trans-Abyss\cite{Robertson:2010ih} and Oases\cite{Schulz:2012je} are
@@ -187,7 +199,7 @@ Velvet\cite{Zerbino:2008vu,Zerbino:2009jp} genome assemblers that are
 tuned to work with RNA-Seq data.  These assemblers are comparable at
 reconstructing existing and novel alternative isoforms with a slightly
 different sensitivity and specificity.  However, Oases with Oases-M
-has been shown to be superior than other \emph{de novo} assemblers at
+has been shown to be superior than other {\em de novo} assemblers at
 discovering isoforms in human and mouse\cite{Schulz:2012je}.
 
 In this study, we present a pipeline that uses {\em de novo} assembly
@@ -196,7 +208,7 @@ apply a technique we call ``local assembly'' that enhances the sensitivity
 of alternative isoform detection by Oases.  The results show that the
 pipeline can detect more isoforms than Oases-M and can detect isoforms
 not found by Cufflinks.  We also showed that transcripts reconstructed
-from \emph{de novo} assembly and mapping-based approach can be merged
+from {\em de novo} assembly and mapping-based approach can be merged
 to build more complete gene models.
 
 % Results and Discussion can be combined.
@@ -210,8 +222,8 @@ GAII mRNAseq data sets sequenced from chicken spleen (see Methods and
 Materials).  In the assembly, we used multiple distinct k-mer values
 for Velvet to sensitively recover as many different isoforms as possible
 \cite{Schulz:2012je}.  We chose k-mers between 21 and 31,
-and recovered between 340,000 and 370,000 unique sequences from
-each data set (see Table~\ref{unique_sequences}, and Materials and
+and recovered between 90,700 and 104,000 unique sequences from
+each data set (see Table~\ref{total_sequences}, and Materials and
 Methods).  These unique sequences represented an unknown number of
 true genes, due to fragmentation from low coverage and incomplete
 assembly.
@@ -221,21 +233,32 @@ reads by chromosome; we then assembled the partitioned reads with
 Velvet and Oases using the same range of parameters as the global
 assembly, above.  While the local assemblies were considerably more
 computationally efficient, they lacked several thousand unique regions
-that were present in the global assembly
+that were present in the global assembly (Table~\ref{unique_sequences},
+
 % @CTB why are the global ones not included in the final gene models?
-(Table~\ref{unique_sequences_matched_mouse}); this is probably due to
-the incomplete nature of the current chicken genome assembly, which is
-lacking approximately 5\% of its true gene content (@cite).
-Interestingly, over a hundred regions were present {\em only} in the
-local assemblies, suggesting that the local assemblies might be
-recovering additional exons.  Significant numbers of unique regions
-from both global and local assemblies showed homology to the mouse
-genome, indicating that at least some of these unique sequences
-represented real sequence content.  Figure~\ref{global_vs_local} shows
-an example of different isoforms detected by the two assembly methods.
+% @LP they are included in the final models if they align to the genome.
+
+and Table~\ref{unique_sequences_matched_mouse}); this is probably due to the
+incomplete nature of the current chicken genome assembly, which is lacking
+approximately 5\% of its true gene content (@cite).  Interestingly, over a
+hundred regions were present {\em only} in the local assemblies,
+suggesting that the local assemblies might be recovering additional exons.
+Significant numbers of unique regions from both global and local assemblies
+showed homology to the mouse genome, indicating that at least some of these
+unique sequences represented real sequence content.
+Figure~\ref{global_vs_local} shows an example of different isoforms detected by
+the two assembly methods.
 
 % @CTB how many reads are discarded in the process of mapping?
+
+
 % @CTB what does local assembly actually do to the DBG??
+% @LP I think the difference is that ambiguous reads, especially spliced reads
+% are used for assembly more than once in local assembly because Tophat reports
+% multiple alignments. So, reads mapped to multiple chromosomes get assembled
+% independently. Assembling all mapped reads at once misses some splice
+% junctions when compared to assembling each chromosome separately.
+
 % @CTB what happens if you ask how many unique regions there are not
 %   represented in the final gene models?
 
@@ -253,25 +276,36 @@ demonstrated that merged transcripts from multiple-k assemblies
 contain more isoforms than those from any single $k$, the sensitivity
 of Oases-M for recovering splice variants has not been fully
 evaluated.
+
 % @CTB what does this mean? ``not fully evaluated''?
-We merged transcripts from our global assembly, above,
-with Oases-M using a k-mer size of 27, and compared them with the
-unmerged transcripts.  We then cross-validated using publicly
-available ESTs, which were not used in our assembly.
-The results show that
-Oases-M and the unmerged assembly share about 104,413 (95\%) of the predicted
-splice junctions, with 5\% disjoint.  Of these 5\%,
-approximately 421 (6\%) of the Oases-M-specific splice junctions are
-independently supported by ESTs, while 1,607 (19\%) of the unmerged splice
-junctions are supported by ESTs.
-% @CTB change from percent to total number, with percent in parantheses
-This suggests that Oases-M probably
-discards a number of real splice variants, although the unmerged
+% @LP Oases paper only evaluate completeness of transcripts by their alignments
+% to the ref sequences. I believe the cutoff they used for a good alignment was
+% 80 percent match. I have to reread it again though, but I'm quite positive.
+
+We merged transcripts from our global assembly, above, with Oases-M using a
+k-mer size of 27, and compared them with the unmerged transcripts.  We then
+cross-validated using publicly available ESTs, which were not used in our
+assembly.  The results show that Oases-M and the unmerged assembly share about
+104,413 (94\%) of the predicted splice junctions, with 6\% disjoint.  Of these
+6\%, approximately 420 (6.1\%) of the Oases-M-specific splice junctions are
+independently supported by ESTs, while 1,608 (19.4\%) of the unmerged splice
+junctions are supported by ESTs (Table~\ref{Oases-M}).  This suggests that Oases-M
+probably discards a number of real splice variants, although the unmerged
 assembly is also missing some found by Oases-M.
 
-% @CTB why would Oases-M create ``good'' splice variants from the unmerged assembly?
+% @CTB why would Oases-M create ``good'' splice variants from the unmerged
+% assembly?
+% @LP My guess is OasesM can extend transcripts from all k-mers and longer
+% transcripts may be aligned better to the genome.
+
 % @CTB does the math for table three work out here?
-% @CTB is Oases-M meant to work with non-oases-assembled transcripts? is it a general merging tool?
+% @LP yes, percent match is calculated from unique region of each type of
+% assembly.
+
+
+% @CTB is Oases-M meant to work with non-oases-assembled transcripts? is it a
+% general merging tool?
+% @LP I think it's kind of a general merging tool.
 
 \subsection*{Exon graphs can reconstruct putative splice variants}
 
@@ -280,41 +314,39 @@ alignments of transcripts against the genome.  Our approach,
 implemented in a software package called Gimme, merges transcripts and
 gene models based on overlapping exons using an exon-graph approach
 (see Materials and Methods; Figure~\ref{algorithm}).  We used Gimme to obtain
-20,439 gene models containing 25,859 isoforms from our global
-assembly; 21,963 gene models containing 25,859 from our local
-assembly; and 20,922 gene models containing 27,732 isoforms from the
+21,492 gene models containing 31,418 isoforms from our global
+assembly; 24,928 gene models containing 29,776 from our local
+assembly; and 22,587 gene models containing 34,800 isoforms from the
 merged global and local assemblies (Table~\ref{genes_transcripts}).
-
-% (more here - what? @CTB)
 
 \subsection*{Validation of Gene Models}
 
-Our pipeline predicts many gene models and isoforms after assembly.
-We validated these gene models in several different ways.  XX more!
+Our pipeline predicts many gene models and isoforms after assembly.  We
+validated these gene models in several different ways.
 
 % @CTB discuss: single ended, short reads => difficult to construct
 % gene models.  How are isoforms assembled by oases, anyway!?
 
 \subsubsection*{The gene models include most reads}
 
-We used bowtie to map single-end reads from the source datasets to the
-transcripts.  More than 80\% of the original reads could be aligned to
-the transcripts, demonstrating that we did not lose a significant
-amount of information during the merge process
-(Table~\ref{single-end_map}).
-% @CTB compared to what?
-More importantly, we also mapped
-paired-end reads from technical replicates to the same gene models,
-and found that more than 85\% of the paired-ends mapped concordantly
-the gene models (Table~\ref{paired-end_map}).  Most of the reads that
-did not map were either highly erroneous or contained low-complexity
-artifactual sequence that probably originated from sample processing
-and reverse transcription (@cite).
-% @CTB do we have something we can cite for typical % mapping?  Maybe Trinity
-% paper?  How about a citation that suggests that there's a lot of crap
-% in mRNAseq?
-Thus the merged gene models produced by Gimme represent the significant
-majority of the assemblable data.
+We used Bowtie to map single-end reads from the source datasets to the
+transcripts.  More than $75-80$\% of the original reads could be aligned to the
+transcripts, demonstrating that we did not lose a significant amount of
+information during the merge process compared to the number of reads mapped to
+Ensembl gene models (Figure~\ref{mapped-reads}).
+
+More importantly, we also mapped paired-end reads from technical replicates to
+the same gene models, and found that more than 74\% of the paired-ends mapped
+concordantly the gene models.  Most of the reads that did not map were either
+highly erroneous or contained low-complexity artifactual sequence that probably
+originated from sample processing and reverse transcription (@cite).
+
+% @CTB do we have something we can cite for typical mapping?  Maybe Trinity paper?
+% How about a citation that suggests that there's a lot of crap in mRNAseq?
+% @LP I'll search for it.
+
+Thus the merged gene models produced by Gimme represent the significant majority
+of the assemblable data.
 
 \subsubsection*{Almost all splice junctions have high coverage}
 
@@ -325,25 +357,49 @@ Velvet/Oases assembly pipeline does not make use of the reference
 genome, reads that map across a splice junction constitute independent
 verification of a splice junction's presence in a transcript.
 
-Of 100,411 splice junctions from the gene models, 95 (0.09\%)
-junctions have no spliced reads and only 448 (0.45\%) junctions
-have fewer than 4 spliced reads (Fig.~\ref{cdf_single_splice}).
+Of 105,461 splice junctions from the gene models, 2,057 (2\%) junctions have no
+spliced reads and only 4,626 (4.4\%) junctions have fewer than 4 spliced reads
+(Fig.~\ref{cdf_splice}).  Note that 710 junctions are in random chromosomes,
+which may have a great number of genome missassemblies. The number of junctions
+outside random chromosomes with no reads is 1,347/99,986 (1.3\%).
+
 % @CTB how do you get junctions with no spliced reads!?
-More than 99\% of our predicted splice junctions have a coverage
+% @LP our models have many 2,400 more junctions in random chromosomes than
+% cufflinks and 710 of no reads junctions are from random chromosomes. It is
+% likely that those junctions are from missassemblies.
+% @LP Another reason is it has something to do with variation in read
+% mapping between Tophat and bowtie.  Tophat maps spliced reads with less
+% stringency because it has to allow gap alignment and it uses -v mode to map
+% spliced reads. On the other hand, the default mode for bowtie is -n mode,
+% which is the one I used.
+% @LP I used a parameter that set max alignments to 100, only one alignment will
+% be reported if there are more than 100 alignments. Maybe I should let
+% bowtie report all alignments instead.
+
+
+More than 95\% of our predicted splice junctions have a coverage
 of 4 or higher in our combined mRNAseq data sets, suggesting that they are
 real splice junctions.
+
 % @CTB I'm slightly bugged by this statement.  Are we right?!
+% @LP the reason I use 4 as a cutoff because there are four samples and if at
+% least one read from each sample map to the junction, it could be real.
+% Apparently, it is not always the case, but that is my simple logic.
 
 \subsubsection*{Most splice junctions are independently supported}
 
-Of the 100,411 splice junctions in our gene models, 81,838 (81.50\%)
-are supported by ESTs or mRNAs from Genbank.  This is especially
-surprising since our mRNAseq data is from spleen, and most of the
-publicly available ESTs or mRNAs are from other tissues.  Note that
-this cross-validation suggests that the 18,573 novel splice junctions
-{\em not} seen in publicly available ESTs and mRNAs are also likely to
-be real splice junctions from spleen.
+Of the 105,461 splice junctions in our gene models, 83,560 (79.2\%) are
+supported by ESTs or mRNAs from Genbank~\ref{chick_est_venn}.  This is
+especially surprising since our mRNAseq data is from spleen, and most of the
+publicly available ESTs or mRNAs are from other tissues. 16,909 splice junctions
+are found by either Cufflinks or our gene models suggesting a variation in
+sensitivity between two methods. Note that this cross-validation suggests that
+the 12,188 novel splice junctions {\em not} seen in publicly available ESTs and
+mRNAs are also likely to be real splice junctions from spleen.
+
 % @CTB supported by ESTs OR mRNAs, or ESTs AND mRNAs?  Surely the former?
+% @LP supported by ESTs or mRNAs. I unioned splice junctions from ESTs and
+% mRNAs.
 
 \subsubsection*{Our pipeline improves on existing reference-based approaches}
 
@@ -354,53 +410,53 @@ methods to the ENSEMBL gene annotations, which are produced by a
 pipeline that incorporates de novo gene prediction and homology-based
 approaches as well as expression data (@cite).
 
-Cufflinks finds 109,641 splice junctions, and Gimme finds 100,411
-splice junctions.  88,289 of them are in common.  (Venn diagram.)
-
-Both Cufflinks and Gimme find approximately 40-50\% of the genes and
-80-90\% of the splice junctions present in the ENSEMBL gene models
-for chicken.  Cufflinks performs about 10\% better in both cases
-than Gimme, demonstrating that Cufflinks has higher sensitivity
-in recovering ENSEMBL gene models.
-
-The ENSEMBL pipeline does not, however, include a large number of
-splice junctions from ESTs (99,755) or mRNAs (13,641).  Cufflinks and
-Gimme each recover about 10\% of these, with more than 2/3 of these
-recovered by both Cufflinks and Gimme.  This indicates that both Gimme
-and Cufflinks are equally adept at recovering novel splice junctions.
+Cufflinks finds 92,077 splice junctions, and Gimme finds 105,461 splice
+junctions.  80,964 of them are in common (Figure~\ref{chick_venn}). Both
+Cufflinks and Gimme find approximately 40-50\% of the genes and 50-53\% of the
+splice junctions present in the ENSEMBL gene models for chicken.  The ENSEMBL
+pipeline does not, however, include a large number of splice junctions from ESTs
+(97,740) or mRNAs (13,987).  Cufflinks and Gimme each recover about 18\% of
+these, with more than 2/3 of these recovered by both Cufflinks and Gimme.  This
+indicates that both Gimme and Cufflinks are equally adept at recovering novel
+splice junctions.
 
 % @CTB note this suggests that Cufflinks improved recovery for ENSEMBL
 % gene models is false...
+% @LP it does recover some that not recovered by assembly.
 % @CTB what fraction of Cufflinks splice junctions are high coverage (4+)?
+% @LP a bit higher than our gene models, around 99\%, 179 junctions with no
+% reads and 1010 junctions <4.
 
 % @CTB somewhere we might need to define terms: gene/locus,
 % transcript, and splice junction...
 
-When we apply Gimme and Cufflinks to a publicly available mouse
-mRNAseq data set, Gimme and Cufflinks recover approximately the same
-number of splice junctions already known from ENSEMBL.  However, Gimme
-recovers a substantial number of additional splice variants beyond
-Cufflinks and ENSEMBL both.
+When we apply Gimme and Cufflinks to a publicly available mouse mRNAseq data
+set, Gimme and Cufflinks recover approximately the same number of splice
+junctions already known from ENSEMBL (Figure ~\ref{mus_venn}).  However, Gimme
+recovers a substantial number of additional splice variants beyond Cufflinks and
+ENSEMBL both.
 
 % @CTB is the mouse data set from the trinity paper?
+% @LP yes
+
 % @CTB are most of these splice junctions > 3 coverage?
+% @LP I'll figure that out later on.
 
 \subsubsection*{Gimme can iteratively merge sets of gene models}
 
 % @CTB may want to distinguish between Gimme and the assembly method.
 
-As shown above, Cufflinks and the assembly method detect a number of
-distinct but equally valid splice junctions, which suggests that we
-could obtain greater sensitivity to exon-exon junctions in our gene
-models by merging both sets of predictions.
-We therefore used Gimme to merge the Cufflinks and assembly gene
-models Table.~\ref{genes_transcripts}.  This resulted in a decreased
-number of total genes, suggesting that some fragmented genes were
+As shown above, Cufflinks and the Gimme method detect a number of distinct but
+equally valid splice junctions, which suggests that we could obtain greater
+sensitivity to exon-exon junctions in our gene models by merging both sets of
+predictions.  We therefore used Gimme to incorporate the Cufflinks models to
+global and local assembly Table.~\ref{genes_transcripts}.  This resulted in a
+decreased number of total genes, suggesting that some fragmented genes were
 merged together to form more complete gene structures (e.g. see
-Fig.~\ref{cufflinks_asm}). The merged gene models recover 44.19\% and
-58.57\% of splice junctions from ESTs and ENSEMBL respectively, which is
-10-15\% greater than that from corresponding unmerged gene models.
-% @CTB what about splice junctions etc??
+Fig.~\ref{}). The merged gene models recover 49.3\% and 56.2\% of
+splice junctions from ESTs and ENSEMBL respectively
+(Figure~\ref{combined_venn}), which is about 10\% greater than that from
+corresponding unmerged gene models.
 
 % @CTB Note that these results are, frankly, kind of stunning.  Discuss
 % spleen/immune system diversity.
@@ -408,140 +464,150 @@ Fig.~\ref{cufflinks_asm}). The merged gene models recover 44.19\% and
 \subsubsection*{Validating chicken sequences by using mouse homologs}
 
 To validate our predicted isoforms, we extracted putative coding sequences from
-our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan
-successfully translated 22,488 of 27,732 (81.1\%) of our isoforms to
-protein sequences with 50 or more amino acids.  We then searched for
-homologous sequences in mouse ENSEMBL, and found that 15,399 (68.47\%)
-of our isoforms from 12,399 distinct genes match mouse proteins at a
-bit score $\ge1.0$.
-% @CTB
-These matches have a bit-score/length ratio greater than 1,
-which indicates a good agreement between chicken and mouse proteins.
-% @CTB why so few match, really?
+our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan successfully
+translated 28,772 of 34,800 (82.6\%) of our isoforms to protein sequences with
+50 or more amino acids.  We then searched for homologous sequences in mouse
+ENSEMBL, and found that 22,991 (79.9\%) of our isoforms from 12,945 distinct
+genes match mouse proteins at a bit score $\ge1.0$.
+These matches have a bit-score/length ratio greater than 1, which indicates a
+good agreement between chicken and mouse proteins.
 
 % @CTB for discussion: what's surprising about all of this? so many
 % splice variants, etc?  Note we need to go over pickrell paper carefully.
 
-\section*{Leftover Results text}
-
-The program can merge all transcripts from multiple-kmers and predict
-a structure of full-length isoforms and genes.
-Total of 20,439 genes were obtained from global assembly and 21,963 genes
-from local assembly.
-However, the number of genes obtained from global + local assembly is only 20,922 genes.
-The number of isoforms slightly increased after combining
-transcripts from global and local assembly together (Table~\ref{genes_transcripts}). 
-
-Most transcripts include a large part of untranslated regions (UTRs), especially $3'$ UTR in our datasets.
-These regions are challenging to predict correctly solely from computational methods due to low degree of conservation [?].
-RNA-Seq-derived gene models are useful for studying variations within UTR regions, which may be involved in regulation of isoform expression\cite{} (Fig.~\ref{long_utr}).
-
-\subsection*{An overestimated number of genes and transcripts}
-
-The number of genes from our pipeline might be overestimated due to
-fragmented transcripts.  In our datasets, read coverage is lower at
-the $5'$ end due to the method used to convert mRNA to cDNA in library
-preparation.  A bias of read coverage toward $3'$ end and low
-expression level result in fragmented transcripts as shown in
-Fig.~\ref{fragmented_transcripts}.  Moreover, spurious splice
-junctions due to duplication in genome sequence can lead to a large
-number of dubious isoforms.  This seems to occur in a few genome
-sequences such as chromosome E64\_random.
-Figure~\ref{isoforms_boxplot} shows that a majority of genes from our
-gene models have only a few isoforms.
-
-In addition, parameters used in building gene models such as minimum
-exon/intron size determine how transcripts are merged together, which
-can increases or decreases the number of isoforms.  In this study, we
-adjust the parameters to enhance sensitivity of splice junctions
-detection that may result in overestimation of the number of isoforms.
-
-Most transcripts from RNA-Seq assembly include untranslated regions (UTRs),
-especially $3'$ UTR in our datasets.
-These regions are challenging to predict correctly solely from computational
-methods due to low degree of conservation (cite).
-RNA-Seq-derived gene models are useful for studying variations within UTR regions,
-which may be involved in regulation of isoform expression (cite).
-Figure~\ref{alter_5utr} and figure~\ref{long_utr} shows an example of alternative
-$5'$UTRs and extended $3'$UTR respectively.
-
-\subsubsection*{Cufflinks}
-
-To evaluate an efficiency of our pipeline in detecting splice junctions,
-we compared the number of splice junctions detected by our pipeline to
-that from , ESTs and Ensembl gene models version 64.
-Cufflinks detected 88,289 (87.93\%) splice junctions that are also detected
-by our pipeline.
-However, 42.43\% (5,143) of junctions not detected by Cufflinks are supported
-by ESTs or mRNAs.
-This suggests that the assembly detects some splice junctions that are
-not detected by Cufflinks and they are genuine splice junctions.
-
-We also aligned transcripts from Cufflinks and the pipeline to Ensembl
-transcripts to compare genes and transcripts detected by both methods.
-We selected only transcripts that match with more than 90\% identity and
-cover more than 80\% of an Ensembl transcript.
-Our pipeline detects 7,298 genes and Cufflinks detects 8,341 genes of
-total 17,934 Ensembl genes.
-6,798 of those genes are both detectd by our pipeline and Cufflinks.
-In addition, we wanted to compare the number of isoforms detected by our
-pipeline and Cufflinks within the same gene; however, a transcript can
-match to multiple isoforms in the same gene, especially when it is not complete.
-Therefore, we compare the number of splice junctions detected by both
-methods within the same gene instead.
-From 6,798 genes, our pipeline detects 56,332 splice junctions, whereas
-Cufflinks detects 62,150 junctions.
-
-However, because Ensembl gene models do not include all isoforms or
-splice junctions from ESTs, we investigated splice junctions that are
-not in Ensembl but are supported by ESTs in those 6,798 genes and
-found that our pipeline detects 1,997 splice junctions and Cufflinks
-only detects 1,860 splice junctions.
-Figure ~\ref{alt_splice_site} shows an example of splice junctions not
-included in Ensembl gene models, which are detected by our pipeline.
-
-To conclude, Cufflinks performs better than our pipeline for detecting
-both genes and splice junctions in Ensembl gene models.
-However, we found that our pipeline detects more splice junctions
-that are not in Ensembl but are supported by ESTs.
-
-\subsubsection*{isoforms and mouse}
-
-The results illustrate that isoforms constructed
-by our pipeline are translatable and may be functional.  However,
-genes or isoforms with no match to mouse proteins are not necessarily
-artifacts.  They can be genes or isoforms that are only found in
-non-mammal vertebrates or novel genes.
+% \section*{Leftover Results text}
+% 
+% The program can merge all transcripts from multiple-kmers and predict a
+% structure of full-length isoforms and genes.  Total of 20,439 genes were
+% obtained from global assembly and 21,963 genes from local assembly.  However,
+% the number of genes obtained from global + local assembly is only 20,922 genes.
+% The number of isoforms slightly increased after combining transcripts from
+% global and local assembly together (Table~\ref{genes_transcripts}). 
+% 
+% Most transcripts include a large part of untranslated regions (UTRs), especially
+% $3'$ UTR in our datasets.  These regions are challenging to predict correctly
+% solely from computational methods due to low degree of conservation [?].
+% RNA-Seq-derived gene models are useful for studying variations within UTR
+% regions, which may be involved in regulation of isoform expression\cite{}
+% (Fig.~\ref{long_utr}).
+% 
+% \subsection*{An overestimated number of genes and transcripts}
+% 
+% The number of genes from our pipeline might be overestimated due to
+% fragmented transcripts.  In our datasets, read coverage is lower at
+% the $5'$ end due to the method used to convert mRNA to cDNA in library
+% preparation.  A bias of read coverage toward $3'$ end and low
+% expression level result in fragmented transcripts as shown in
+% Fig.~\ref{fragmented_transcripts}.  Moreover, spurious splice
+% junctions due to duplication in genome sequence can lead to a large
+% number of dubious isoforms.  This seems to occur in a few genome
+% sequences such as chromosome E64\_random.
+% Figure~\ref{isoforms_boxplot} shows that a majority of genes from our
+% gene models have only a few isoforms.
+% 
+% In addition, parameters used in building gene models such as minimum
+% exon/intron size determine how transcripts are merged together, which
+% can increases or decreases the number of isoforms.  In this study, we
+% adjust the parameters to enhance sensitivity of splice junctions
+% detection that may result in overestimation of the number of isoforms.
+% 
+% Most transcripts from RNA-Seq assembly include untranslated regions (UTRs),
+% especially $3'$ UTR in our datasets.
+% These regions are challenging to predict correctly solely from computational
+% methods due to low degree of conservation (cite).
+% RNA-Seq-derived gene models are useful for studying variations within UTR regions,
+% which may be involved in regulation of isoform expression (cite).
+% Figure~\ref{alter_5utr} and figure~\ref{long_utr} shows an example of alternative
+% $5'$UTRs and extended $3'$UTR respectively.
+% 
+% \subsubsection*{Cufflinks}
+% 
+% To evaluate an efficiency of our pipeline in detecting splice junctions,
+% we compared the number of splice junctions detected by our pipeline to
+% that from , ESTs and Ensembl gene models version 64.
+% Cufflinks detected 88,289 (87.93\%) splice junctions that are also detected
+% by our pipeline.
+% However, 42.43\% (5,143) of junctions not detected by Cufflinks are supported
+% by ESTs or mRNAs.
+% This suggests that the assembly detects some splice junctions that are
+% not detected by Cufflinks and they are genuine splice junctions.
+% 
+% We also aligned transcripts from Cufflinks and the pipeline to Ensembl
+% transcripts to compare genes and transcripts detected by both methods.
+% We selected only transcripts that match with more than 90\% identity and
+% cover more than 80\% of an Ensembl transcript.
+% Our pipeline detects 7,298 genes and Cufflinks detects 8,341 genes of
+% total 17,934 Ensembl genes.
+% 6,798 of those genes are both detectd by our pipeline and Cufflinks.
+% In addition, we wanted to compare the number of isoforms detected by our
+% pipeline and Cufflinks within the same gene; however, a transcript can
+% match to multiple isoforms in the same gene, especially when it is not complete.
+% Therefore, we compare the number of splice junctions detected by both
+% methods within the same gene instead.
+% From 6,798 genes, our pipeline detects 56,332 splice junctions, whereas
+% Cufflinks detects 62,150 junctions.
+% 
+% However, because Ensembl gene models do not include all isoforms or
+% splice junctions from ESTs, we investigated splice junctions that are
+% not in Ensembl but are supported by ESTs in those 6,798 genes and
+% found that our pipeline detects 1,997 splice junctions and Cufflinks
+% only detects 1,860 splice junctions.
+% Figure ~\ref{alt_splice_site} shows an example of splice junctions not
+% included in Ensembl gene models, which are detected by our pipeline.
+% 
+% To conclude, Cufflinks performs better than our pipeline for detecting
+% both genes and splice junctions in Ensembl gene models.
+% However, we found that our pipeline detects more splice junctions
+% that are not in Ensembl but are supported by ESTs.
+% 
+% \subsubsection*{isoforms and mouse}
+% 
+% The results illustrate that isoforms constructed
+% by our pipeline are translatable and may be functional.  However,
+% genes or isoforms with no match to mouse proteins are not necessarily
+% artifacts.  They can be genes or isoforms that are only found in
+% non-mammal vertebrates or novel genes.
 
 
 \section*{Discussion}
 
-Choice of k-mers greatly affects sensitivity of splice variants detection in RNA-Seq assembly using Velvet/Oases.
-Short k-mers increase sensitivity, but also introduce errors from misassembly.
-However, for a study focusing on alternative splicing, it is desirable to detect as many splice variant as possible.
-We have presented the local assembly technique that enhances the ability to detect splice variants of Velvet/Oases from the same
-k-mer.
-The mechanism behind this technique is to be investigated.
-Importantly, understanding of the mechanisms may lead to a filtering technique that can be applied to organisms that lack a reference genome.
+For organisms with a reference genome and Ensembl annotation, building gene
+models from RNA-Seq reads using Cufflinks with Ensembl gene models as a
+reference guide seem to be a preferable method for gene and isoform expression
+analysis.  However, we have shown that Ensembl models in chicken are missing a
+substantial number of splice variants found in ESTs and mRNAs and Cufflinks does
+not recover all splice variants.  Previous study by Schulz \emph{et
+al.}\cite{Schulz:2012je} demonstrates that Cufflinks outperformed \emph{de novo}
+assembly in detecting genes and isoforms in Ensembl annotations in mouse.
+However, we found that Cufflinks almost exclusively finds splice junctions in
+mouse Ensembl gene models when our gene models include splice junctions not in
+Ensembl gene models but supported by ESTs (Figure~\ref{mus_venn}). 
 
-We have also developed a pipeline that assembles reconstructed transcripts from multiple k-mers to build putative gene models.
-Overall, a majority of splice variants detected by our pipeline are also detected by Cufflinks.
-Both our pipeline and Cufflinks also detect some splice variants that are not overlapped.
-Combination of both methods results in more complete gene models,
-which suggests that combination of \emph{de novo} assembly and reference-based assembly is preferred to study alternative splicing in chicken.
+To build mouse Cufflinks gene models, we used Tophat default parameters claimed
+to be fine-tuned for mammalian RNA-Seq reads, but Cufflinks still poorly
+detected splice junctions not in Ensembl.  This suggests that the parameters may
+have been set based on mammalian Ensembl models, which could limit the
+efficiency of finding novel splice variants in other non-mammal organisms.  In
+contrast, {\em de novo} assembly does not rely on species-specific parameters.
+It is, therefore, recommended that a combination of Cufflinks models and
+transcripts from de novo assembly should be used to build gene models that
+include more splice variants.
 
-Interestingly, Cufflinks detects more genes and isoforms included in Ensembl annotations than our pipeline.
-However, our pipeline detects many more splice junctions not included in Ensembl but supported by ESTs.
-As observed in previous study by Schulz \emph{et al.}\cite{Schulz:2012je}, Cufflinks also outperforms \emph{de novo} assembly in
-detecting genes and isoforms in Ensembl annotations in mouse.
-We speculate that Cufflinks possesses a mechanism that is tailored to detect Ensembl gene models.
+We have also shown that the local assembly could greatly increase sensitivity
+of splice variant detection. However, how the local assembly affect the assembly
+is not clearly understood.  We speculated that read with multiple alignments may
+play a significant role in enhancing the assembly of splice variants.
+Understanding of the mechanisms may lead to a technique that can be applied to
+find splice variants in organisms that lack a reference genome.
 
-In this study, gene models are built from chicken genome version 2.1 (galGal3),
-which contains a considerable number of sequence duplications and
-missassemblies that supposed to be eliminated in the latest version of genome assembly (galGal4).
-Duplications and misassemblies lead to false splice junctions, which in turn produce a large number of splice variants as
-observed in some chromosomes.
-Conversely, this suggests that one might be able to use the pipeline to evaluate the quality of reference genome.
+Both Cufflinks and our pipeline relies heavily on a reference genome, therefore,
+the quality of the genome will greatly affect the quality of the gene models.
+In this study gene models were built from chicken genome version 2.1 (galGal3),
+which contains a considerable number of sequence duplications and missassemblies
+that supposed to be eliminated in the latest version of genome assembly
+(galGal4).  Duplications and misassemblies lead to false splice junctions, which
+in turn produce a large number of splice variants as observed in some
+chromosomes.
 
 % You may title this section "Methods" or "Models". 
 % "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
@@ -549,108 +615,128 @@ Conversely, this suggests that one might be able to use the pipeline to evaluate
 \section*{Materials and Methods}
 
 \subsection*{Quality trimming of reads}
-Both single- and paired-end reads in this study were trimmed using Condetri version 2.1 with default parameters.
-In addition, the first 10 bases of each reads were trimmed off due to an inconsistency of base-calling as shown in supplementary figure S?.
+Both single- and paired-end reads in this study were trimmed using Condetri
+version 2.1 with default parameters.  In addition, the first 10 bases of each
+reads were trimmed off due to an inconsistency of base-calling.
+
+% (as shown in supplementary figure S?.)
 
 \subsection*{Data}
 Mouse RNA-Seq dataset (SRX062280) is downloaded from Short Read Archives (SRA).
-Chicken RNA-Seq datasets were obtained from sequencing of mRNAs from spleen of chicken line 6 and 7.
+Chicken RNA-Seq datasets were obtained from sequencing of mRNAs from spleen of
+chicken line 6 and 7.
 
 \subsection*{Mapping reads to The Reference Genome and Gene Models}
 
-Single and paired-end reads were mapped to chicken genome by Tophat2\cite{Trapnell:2009dp} release 2.0.0 using
-default parameters without annotations.
-All reads were mapped to cDNA sequences derived from gene models by Bowtie2\cite{Langmead:2009fv} with
-default parameters \texttt{(n=2, l=28, e=70, k=1)}.
-Reads from mouse dataset were mapped to mouse genome (mm9) downloaded from Tophat website \texttt{http://tophat.cbcb.umd.edu}.
+Single and paired-end reads were mapped to chicken genome by
+Tophat2\cite{Trapnell:2009dp} release 2.0.0 using default parameters without
+annotations.  All reads were mapped to cDNA sequences derived from gene models
+by Bowtie2\cite{Langmead:2009fv} with default parameters \texttt{(n=2, l=28,
+e=70, k=1)}.  Reads from mouse dataset were mapped to mouse genome (mm9)
+downloaded from Tophat website \texttt{http://tophat.cbcb.umd.edu}.
 
 \subsection*{Global and Local Assembly}
 
-Reads from each dataset were first assembled separately in global assembly without using a reference genome.
-In contrast, reads from each dataset were first mapped to the chicken genome using Tophat2.
-Then only reads mapped to the genome were assembled by chromosomes in local assembly (Fig.~\ref{local_assembly}).
-Global and local assembly was performed using Velvet version 1.2.03\cite{Zerbino:2008vu}
-with default parameters except for hash length (k-mer).
-A range of k-mer length from 21-31 was used to assemble reads in both global and local assembly.
-Lastly, transcripts from both methods were assembled by Oases version 0.2.06\cite{Schulz:2012je}.
+Reads from each dataset were first assembled separately in global assembly
+without using a reference genome.  In contrast, reads from each dataset were
+first mapped to the chicken genome using Tophat2.  Then only reads mapped to the
+genome were assembled by chromosomes in local assembly
+(Fig.~\ref{local_assembly}).  Global and local assembly was performed using
+Velvet version 1.2.03\cite{Zerbino:2008vu} with default parameters except for
+hash length (k-mer).  A range of k-mer length from 21-31 was used to assemble
+reads from chicken data and k-mer length 27 was used to assemble reads from
+mouse data.  Lastly, transcripts from both methods were assembled by Oases
+version 0.2.06\cite{Schulz:2012je}.
+A poly-A tail, short transcripts and transcripts with low complexity are removed
+by seqclean~\cite{seqclean} with default parameters.  Redundant transcripts are
+removed by cd-hit-est from CD-HIT suite\cite{Li:2006hr}.  A substantial number
+of transcripts are removed at this step, which facilitates gene models
+construction process.
 
-A poly-A tail, short transcripts and transcripts with low complexity are removed by
-seqclean\cite{seqclean} with default parameters.
-Redundant transcripts are removed by cd-hit-est from CD-HIT suite\cite{Li:2006hr}.
-A large number of transcripts are removed at this step, which facilitates gene models construction process.
-
-We obtained 334,475 transcripts, of which 295,588 transcripts (88.37\%) mapped to chicken genome.
-Only transcripts mapped to chicken genome are used to build gene models.
+We obtained 339,199 transcripts, of which 315,998 transcripts (93.2\%) mapped
+to chicken genome.  Only transcripts mapped to chicken genome are used to build
+gene models.
 
 \subsection*{Gene Model Construction}
 
 \subsubsection*{Overall Pipeline}
 
-Figure~\ref{overall_pipeline} depicts an overall gene model construction pipeline.
-Transcripts of all datasets from local and global assembly were mapped to the chicken genome using
-BLAT\cite{Kent:2002tv} \texttt{(-t=dna -q=dna -noHead -out=psl -mask=lower -extendThroughN -dots=1000)}.
-Alignments and gaps from BLAT outputs are considered exons and introns respectively.
-Optionally, data from other sources (ESTs, RefGenes, etc.) can be incorporated with transcripts from assembly to improve gene models.
-All transcripts are then assembled using Gimme, a program that assembles transcripts based on their alignments to the reference genome.
-An algorithm for assembling transcripts is described below.
-A maximum set of transcripts obtained from Gimme are then reduced to only a minimum set of transcripts that contain
-all splice junctions and untranslated regions (UTRs).
-After that, transcripts that are highly similar ($>99\%$) are clustered and removed by CD-HIT version 4.5.6\cite{Li:2006hr}.
-Parameters for clustering are \texttt{-n 10, -r 0 and -c 0.99}.
-Only a representative of each cluster is kept in gene models.
+Figure~\ref{overall_pipeline} depicts an overall gene model construction
+pipeline.  Transcripts of all datasets from local and global assembly were
+mapped to the chicken genome using BLAT\cite{Kent:2002tv} \texttt{(-t=dna -q=dna
+-noHead -out=psl -mask=lower -extendThroughN -dots=1000)}.  Alignments and gaps
+from BLAT outputs are considered exons and introns respectively.  Optionally,
+data from other sources (ESTs, RefGenes, etc.) can be incorporated with
+transcripts from assembly to improve gene models.  All transcripts are then
+assembled using Gimme, a program that assembles transcripts based on their
+alignments to the reference genome.  An algorithm for assembling transcripts is
+described below.  A maximum set of transcripts obtained from Gimme are then
+reduced to only a minimum set of transcripts that contain all splice junctions
+and untranslated regions (UTRs).  After that, transcripts that are highly
+similar ($>99\%$) are clustered and removed by CD-HIT version
+4.5.6\cite{Li:2006hr}.  Parameters for clustering are \texttt{-n 10, -r 0 and -c
+0.99}.  Only a representative of each cluster is kept in gene models.
 
 \subsubsection*{Algorithm}
 
-A gene model can be represented as a splice graph composed of exons as nodes and introns as edges.
-However, transcripts of the same gene vary in size and structure depending on the expression level
-and a hash length number used in assembly.
-Furthermore, incomplete exons and fragmented transcripts complicate the construction of a splice graph.
-In this study, we developed an algorithm that handles incomplete exons and fragmented transcripts
-and constructs a maximum assembly of gene models.
+A gene model can be represented as a splice graph composed of exons as nodes and
+introns as edges.  However, transcripts of the same gene vary in size and
+structure depending on the expression level and a hash length number used in
+assembly.  Furthermore, incomplete exons and fragmented transcripts complicate
+the construction of a splice graph.  In this study, we developed an algorithm
+that handles incomplete exons and fragmented transcripts and constructs a
+maximum assembly of gene models.
 
-The algorithm first builds an intron graph using introns as nodes.
-Each intron contains exons whose one of their splice sites perfectly match intron boundaries.
-Exons are considered incomplete and eliminated if they locate at the $3'$ or $5'$ end of the transcripts and
-they are not the largest exons (exon 3a and 3b in Fig.~\ref{algorithm}).
-Transcripts were then grouped into the same gene if they have at least one intron or exon in common.
-Then, a splice graph composed of exons is created and structures of isoforms are derived from traversing
-paths in the splice graph.
-Gimme is open-source and available at \texttt{https://github.com/ged-lab/gimme}.
+The algorithm first builds an intron graph using introns as nodes.  Each intron
+contains exons whose one of their splice sites perfectly match intron
+boundaries.  Exons are considered incomplete and eliminated if they locate at
+the $3'$ or $5'$ end of the transcripts and they are not the largest exons (exon
+3a and 3b in Fig.~\ref{algorithm}).  Transcripts were then grouped into the same
+gene if they have at least one intron or exon in common.  Then, a splice graph
+composed of exons is created and structures of isoforms are derived from
+traversing paths in the splice graph.  Gimme is open-source and available at
+\texttt{https://github.com/ged-lab/gimme}.
 
 \subsection*{Protein sequence translation}
 
-We employed ESTScan version 2.1 to translate protein sequences from our gene models.
-The matrix used for building Hidden Markov model was built from chicken reference cDNA sequences using tools from ESTScan.
+We employed ESTScan version 3.0.3 to translate protein sequences from our gene
+models.  The matrix used for building Hidden Markov model was built from chicken
+reference cDNA sequences using tools from ESTScan. Only protein sequences longer
+than 50 bp are included in the analysis.
 
 \subsection*{Finding unique sequences between datasets}
 
-To identify unique sequences from two datasets, a set of 20-mers is created for both datasets using
-khmer\cite{khmer}.
-Then, 20-mers from a query dataset are compared with 20-mers from the target dataset.
-The sequence is considered unique if more than 90\% of 20-mers in the query is unique.
-Any unique region shorter than 100 bp is ignored.
+To identify unique sequences from two datasets, a set of 20-mers is created for
+both datasets using khmer\cite{khmer}.  Then, 20-mers from a query dataset are
+compared with 20-mers from the target dataset.  The sequence is considered
+unique if more than 90\% of 20-mers in the query is unique.  Any unique region
+shorter than 300 bp is ignored.
 
 \subsection*{Sequence homology analysis}
 
-Protein sequences translated from each isoform using ESTScan were searched against mouse reference proteins by BLAST 2.2.25+\cite{Tatusova:1999tz}.
-A bit score to a length ratio was calculated for each hit that had an e-value $\le 10^{-20}$.
-Only the highest value of all isoforms from each gene was shown in the gene plot; whereas, values of all isoforms were shown in the isoform plot.
+Protein sequences translated from each isoform using ESTScan were searched
+against mouse reference proteins by BLAST 2.2.25+\cite{Tatusova:1999tz}.  A bit
+score to a length ratio was calculated for each hit that had an e-value $\le$
+10\textsuperscript{-20}.  Only the highest value of all isoforms from each gene
+was shown in the gene plot; whereas, values of all isoforms were shown in the
+isoform plot.
 
 \subsection*{Spliced reads count}
 
-Reads from each dataset were mapped to transcripts from the gene models using Bowtie version 2.0-beta 5 with default parameters.
-Reads mapped across exon junctions from all datasets were counted using Samtools\cite{Li:2009vz} and
-Pysam\cite{pysam}
+Reads from each dataset were mapped to transcripts from the gene models using
+Bowtie version 1.0.0. The parameter is set for Bowtie to report up to 100
+alignments per read.  Reads mapped across exon junctions from all datasets were
+counted using Samtools\cite{Li:2009vz} and Pysam\cite{pysam}.
 
 \subsection*{Sequence assembly using Cufflinks}
-Reads are mapped to a genome sequence using Tophat2.
-Gene models are built from each datasets by Cufflinks 2.0.0\cite{Trapnell:2010kd}.
-All gene models are then merged together using Cuffmerge.
+Reads are mapped to a genome sequence using Tophat.  Gene models are built from
+each datasets by Cufflinks 2.0.0\cite{Trapnell:2010kd}.  All gene models are
+then merged together using Cuffmerge.
 
 \subsection*{Expressed sequence tags and Genbank mRNA}
-Expressed sequence tags (ESTs) and mRNAs were downloaded from UCSC genome website.
-The database was updated from GENBANK on 1 January 2014.
-Sequences were aligned to a chicken genome using BLAT.
+Expressed sequence tags (ESTs) and mRNAs were downloaded from UCSC genome
+website.  The database was updated from GENBANK on 1 January 2014.  Sequences
+were aligned to a chicken genome using BLAT.
 
 % Do NOT remove this, even if you are not including acknowledgments
 %\section*{References}
@@ -659,18 +745,36 @@ Sequences were aligned to a chicken genome using BLAT.
 
 \section*{Tables}
 \begin{table}[!ht]
+
 \caption{
-\bf{Unique sequences from global and local assembly}}
-% @CTB do we want to make this base pairs instead of #s? Same for table 2.
+\bf{Total unique sequences from global and local assembly (k=$21-31$)}}
+\begin{tabular}{ccc}
+\hline
+Dataset & Total Sequence & \\
+        & Global & Local \\
+\hline
+Line 6 uninfected & 90,705 & 68,845\\
+Line 6 infected & 104,785 & 70,191 \\
+Line 7 uninfected & 90,125 & 63,302\\
+Line 7 infected &  92,192 & 67,097 \\
+\hline
+%table information
+\end{tabular}
+%\begin{flushleft}Table Caption
+%\end{flushleft}
+\label{total_sequences}
+
+\caption{
+\bf{Unique sequences between global and local assembly}}
 \begin{tabular}{ccccc}
 \hline
-Dataset & \multicolumn{2}{c}{Total Sequence} & \multicolumn{2}{c}{Unique Sequence}\\
- & Global & Local & Global & Local\\
+Dataset & Total size (bp) & & Unique Sequence (bp) & \\
+        & Global & Local & Global & Local\\
 \hline
-Line 6 uninfected & 338,353 & 335,180 & 10,068 (2.97\%) & 1,258 (0.37\%)\\
-Line 6 infected & 353,485 & 319,920 & 11,639 (3.29\%)& 2,270 (0.70\%)\\
-Line 7 uninfected & 335,876 & 302,443 & 10,649 (3.17\%) & 1,570 (0.51\%)\\
-Line 7 infected & 371,404 & 327,491 & 11,859 (3.19?\%)& 1,199 (0.36\%)\\
+Line 6 uninfected & 77,454,439 & 36,662,830 & 3,686,835 (4.8\%) & 307,975 (0.8\%)\\
+Line 6 infected & 86,622,623 & 37,877,766 & 4,157,541 (4.8\%)& 400,702 (1.0\%)\\
+Line 7 uninfected & 76,566,717 & 33,571,348 & 4,180,202 (5.4\%) & 365,850 (1.1\%)\\
+Line 7 infected & 74,957,624 & 33,824,849 & 4,242,922 (5.7\%)& 326,169 (9.6\%)\\
 \hline
 %table information
 \end{tabular}
@@ -685,10 +789,10 @@ Line 7 infected & 371,404 & 327,491 & 11,859 (3.19?\%)& 1,199 (0.36\%)\\
 Dataset & \multicolumn{2}{c}{Unique Region} & \multicolumn{2}{c}{Matched with mouse proteins}\\
  & Global & Local & Global & Local\\
 \hline
-Line 6 uninfected & 2,132 & 104 & 1,322 (62.01\%) & 39 (37.50\%)\\
-Line 6 infected & 2,499 & 104 & 1,514 (60.58\%)& 40 (38.46\%)\\
-Line 7 uninfected & 2,633 & 136 & 1,560 (59.25\%) & 52 (38.24\%)\\
-Line 7 infected & 2,409 & 152 & 1,390 (57.70\%)& 50 (32.89\%)\\
+Line 6 uninfected & 1285929 & 96830 & 260321 (20.0\%) & 9413 (9.7\%)\\
+Line 6 infected & 1631356 & 59813 & 312849 (19.2\%)& 5132 (8.6\%)\\
+Line 7 uninfected & 1800634 & 104229 & 349346 (19.4\%) & 9883 (9.5\%)\\
+Line 7 infected & 1611354 & 125640 & 296915 (18.4\%)& 9381 (7.5\%)\\
 \hline
 %table information
 \end{tabular}
@@ -702,8 +806,8 @@ Line 7 infected & 2,409 & 152 & 1,390 (57.70\%)& 50 (32.89\%)\\
 \hline
 Method& Total & Unique & Unique/supported by ESTs \\ 
 \hline
-Oases-M assembly & 111,237 & 6,860 & 421 (6.1\%) \\
-Unmerged assembly & 112,708 & 8,295 & 1,607 (19.4\%) \\
+Oases-M assembly & 111,273 & 6,860 & 420 (6.1\%) \\
+Global assembly & 112,708 & 8,295 & 1,608 (19.4\%) \\
 \hline
 %table information
 \end{tabular}
@@ -717,13 +821,13 @@ Unmerged assembly & 112,708 & 8,295 & 1,607 (19.4\%) \\
 \hline
 Method& Gene & Isoform \\ 
 \hline
-Global & 20,439 & 26,035 \\
-Local & 21,963 & 25,859 \\
-Global + Local & 20,922 & 27,732 \\
-Cufflinks & 25,318 & 34,959 \\
-Global + Local + Cufflinks & 21,734 & 32,855 \\
-Global + Local + Cufflinks + mRNAs & 26,726 & 43,074\\
 Ensembl & 17,934 & 23,392 \\
+Global & 21,492 & 31,418 \\
+Local & 24,928 & 29,776 \\
+Global + Local & 22,587 & 34,800 \\
+Cufflinks & 31,073 & 38,307 \\
+Global + Local + Cufflinks & 25044 & 45793 \\
+Global + Local + Cufflinks (w/Ensembl) & 24915 & 60976 \\
 \hline
 %table information
 \end{tabular}
@@ -731,39 +835,6 @@ Ensembl & 17,934 & 23,392 \\
 %\end{flushleft}
 \label{genes_transcripts}
 
-\caption{
-\bf{Single-end reads mapped to gene models (maximum)}}
-\begin{tabular}{cccccc}
-\hline
-Dataset & Mapped & Unmapped \\
-\hline
-Line 6 uninfected & 20,169,993 (85.54\%) & 3,409,559 (14.46\%) \\
-Line 6 infected & 18,790,831 (80.13\%) & 4,658,150 (19.87\%) \\
-Line 7 uninfected & 19,844,293 (82.94\%) & 4,081,516 (17.06\%) \\
-Line 7 infected & 21,772,102 (85.84\%) & 3,590,465 (14.16\%) \\
-\hline
-%table information
-\end{tabular}
-%\begin{flushleft}Table Caption
-%\end{flushleft}
-\label{single-end_map}
-
-\caption{
-\bf{Paired-end reads mapped to gene models (maximum)}}
-\begin{tabular}{cccccc}
-\hline
-Dataset & Mapped & Unmapped \\
-\hline
-Line 6 uninfected & 28,696,112 (85.36\%) & 4,967,765 (14.76\%) \\
-Line 6 infected & 20,514,438 (85.93\%) & 3,394,055 (14.20\%) \\
-Line 7 uninfected & 28,159,776 (85.65\%) & 4,761,556 (14.46\%) \\
-Line 7 infected & 29,564,592 (85.88\%) & 4,913,243 (14.25\%) \\
-\hline
-%table information
-\end{tabular}
-%\begin{flushleft}Table Caption
-%\end{flushleft}
-\label{paired-end_map}
 \end{table}
 
 \section*{Figure Legends}
@@ -772,8 +843,10 @@ Line 7 infected & 29,564,592 (85.88\%) & 4,913,243 (14.25\%) \\
 \includegraphics[width=5in]{overall_pipeline.pdf}
 \end{center}
 \caption{
-{\bf Gene model construction pipeline.} Transcripts are obtained from two assembly methods -- global and local assembly.
-Transcripts are aligned to a chicken genome by BLAT\@. Gimme then constructs gene models based on alignments of transcripts.
+{\bf Gene model construction pipeline.} Transcripts are obtained from two
+assembly methods -- global and local assembly.  Transcripts are aligned to a
+chicken genome by BLAT\@. Gimme then constructs gene models based on alignments
+of transcripts.
 }
 \label{overall_pipeline}
 \end{figure}
@@ -784,8 +857,8 @@ Transcripts are aligned to a chicken genome by BLAT\@. Gimme then constructs gen
 \end{center}
 \caption{
 {\bf Local Assembly Pipeline.}
-Reads are first mapped to a chicken genome.
-Then only mapped reads are assembled by Velvet and Oases.
+Reads are first mapped to a chicken genome.  Then only mapped reads are
+assembled by Velvet and Oases.
 }
 \label{local_assembly}
 \end{figure}
@@ -795,25 +868,12 @@ Then only mapped reads are assembled by Velvet and Oases.
 \includegraphics[width=5in]{algorithm.pdf}
 \end{center}
 \caption{
-{\bf Intron and exon graphs.}
-Each intron connects to exons whose splice junctions match it boundary.
-Some exons are excluded from the final gene model if they are incomplete (exon 3a,b).
-Introns sharing at least one exon are grouped together.
-Then an exon graph is made using exons as nodes.
+{\bf Intron and exon graphs.} Each intron connects to exons whose splice
+junctions match it boundary.  Some exons are excluded from the final gene model
+if they are incomplete (exon 3a,b).  Introns sharing at least one exon are
+grouped together.  Then an exon graph is made using exons as nodes.
 }
 \label{algorithm}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{kmers-variance.pdf}
-\end{center}
-\caption{
-{\bf Different isoforms are detected by different k-mer lengths.}
-K-mer=21 detects a skipped exon which is not detected by k-mer=31.
-The skipped exon is also annotated in Ensembl gene models.
-}
-\label{kmer-variance}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -826,77 +886,80 @@ The skipped exon is also annotated in Ensembl gene models.
 \label{global_vs_local}
 \end{figure}
 
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{kmers-variance.pdf}
+% \end{center}
+% \caption{
+% {\bf Different isoforms are detected by different k-mer lengths.}
+% K-mer=21 detects a skipped exon which is not detected by k-mer=31.
+% The skipped exon is also annotated in Ensembl gene models.
+% }
+% \label{kmer-variance}
+% \end{figure}
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{fragmented_transcripts.pdf}
+% \end{center}
+% \caption{
+% {\bf Example of fragmented transcripts near $5'$ end of a long transcript.}
+% }
+% \label{fragmented_transcripts}
+% \end{figure}
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{model_comparisons.pdf}
+% \end{center}
+% \caption{
+% {\bf Comparison of gene models from the \emph{de novo} assembly pipeline with
+% reference and Ensembl gene models on UCSC genome browser.}
+% }
+% \label{model_comparisons}
+% \end{figure}
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=6in]{alter_5utr.pdf}
+% \end{center}
+% \caption{
+% {\bf Examples of alternative $5'$ UTRs in RNA-Seq gene models.}
+% }
+% \label{alter_5utr}
+% \end{figure}
+% 
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{long_utr.pdf}
+% \end{center}
+% \caption{
+% {\bf Examples of an extended $3'$ UTR in RNA-Seq gene models.}
+% }
+% \label{long_utr}
+% \end{figure}
+
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=5in]{fragmented_transcripts.pdf}
+\includegraphics[width=5in]{mapped-reads.pdf}
 \end{center}
 \caption{
-{\bf Example of fragmented transcripts near $5'$ end of a long transcript.}
+{\bf Cumulative counts of splice junctions with spliced reads from both single-
+and paired-end data from Cufflinks and Gimme models.}
 }
-\label{fragmented_transcripts}
+\label{mapped-reads}
 \end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=5in]{model_comparisons.pdf}
+\includegraphics[width=5in]{cdf_splice.pdf}
 \end{center}
 \caption{
-{\bf Comparison of gene models from the \emph{de novo} assembly pipeline with reference and Ensembl gene models on UCSC genome browser.}
+{\bf Cumulative counts of splice junctions with spliced reads from both single-
+and paired-end data.}
 }
-\label{model_comparisons}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=6in]{alter_5utr.pdf}
-\end{center}
-\caption{
-{\bf Examples of alternative $5'$ UTRs in RNA-Seq gene models.}
-}
-\label{alter_5utr}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{long_utr.pdf}
-\end{center}
-\caption{
-{\bf Examples of an extended $3'$ UTR in RNA-Seq gene models.}
-}
-\label{long_utr}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{bitscore.pdf}
-\end{center}
-\caption{
-{\bf Histogram of bit score/length ratio of isoforms and genes that match mouse proteins.}
-}
-\label{bitscore}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{cdf_single_splice.pdf}
-\end{center}
-\caption{
-{\bf Cumulative counts of splice junctions with spliced reads up to 1000 reads.}
-}
-\label{cdf_single_splice}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{chick_venn.pdf}
-\end{center}
-\caption{
-{\bf Splice sites in chicken Ensembl gene models detected by Cufflinks and the \emph{de novo} assembly pipeline.}
-Cufflinks detects many annotated isoforms that are not detected by the pipeline.
-The figure also shows that both methods detect a large number of unannotated splice junctions, which suggests
-that those junctions may be genuine.
-}
-\label{chick_venn}
+\label{cdf_splice}
 \end{figure}
 
 \begin{figure}[!ht]
@@ -904,47 +967,93 @@ that those junctions may be genuine.
 \includegraphics[width=5in]{chick_est_venn.pdf}
 \end{center}
 \caption{
-{\bf Splice sites in Chicken ESTs detected by Cufflinks and the \emph{de novo} assembly pipeline.}
-In contrast to Ensembl gene models, the pipeline and Cufflinks detects the similar number of splice junctions
-from ESTs and mRNAs. This indicates that the pipeline is as efficient as Cufflinks at detecting
-non-annotated splice junctions.
+    {\bf Splice junctions supported by ESTs or mRNAs.}
 }
 \label{chick_est_venn}
 \end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=5in]{mus_venn.pdf}
+\includegraphics[width=5in]{chick_venn.pdf}
 \end{center}
 \caption{
-{\bf Splice sites in mouse Ensembl gene models, Cufflinks and the \emph{de novo} assembly pipeline.}
-In contrast to chicken datasets, Cufflinks and the pipeline detects the similar amount of non-overlapped annotated junctions.
-This may due to a higher quality of gene annotations in mouse.
-}
+{\bf Splice sites in chicken Ensembl gene models detected by Cufflinks and the
+{\em de novo} assembly pipeline.} Cufflinks detects many annotated isoforms
+that are not detected by the pipeline.  The figure also shows that both methods
+detect a large number of unannotated splice junctions, which suggests that those
+junctions may be genuine.  }
+\label{chick_venn}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=5in]{mouse_venn.pdf}
+\end{center}
+\caption{
+{\bf Splice sites in mouse Ensembl gene models, Cufflinks and the \emph{de novo}
+assembly pipeline.} In contrast to chicken datasets, Cufflinks and the pipeline
+detects the similar amount of non-overlapped annotated junctions.  This may due
+to a higher quality of gene annotations in mouse.  }
 \label{mus_venn}
 \end{figure}
 
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{alt_splice_site.pdf}
-\end{center}
-\caption{
-{\bf Unannotated alternative splice site.}
-The pipeline detects alternative splices site not annotated in Ensembl and Cufflinks but are supported by ESTs.
-}
-\label{alt_splice_site}
-\end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
-\includegraphics[width=5in]{mrna_cuff_gimme.pdf}
+\includegraphics[width=5in]{cuff_gimme_junctions_venn.pdf}
 \end{center}
 \caption{
-{\bf mRNAs + Cufflinks + Assembly gene models.}
-Gimme can combine transcripts from different sources to build gene models.
-In this figure, the final gene model includes several isoforms not annotated in the reference gene model.
+    {\bf Splice junctions found in merged models.} Merged models (B) find more
+    splice junctions in ENSEMBL and ESTs + mRNAs than Cufflinks models only (A).
 }
-\label{mrna_cuff_gimme}
+\label{combined_venn}
 \end{figure}
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{chick_est_mrna_venn.pdf}
+% \end{center}
+% \caption{
+% {\bf Splice sites in Chicken ESTs and mRNAs not included in Ensembl detected by
+% Cufflinks and the \emph{de novo} assembly pipeline.}
+% Both Cufflinks and our pipeline find splice junctions not included in Ensembl
+% but supported by EST and mRNA sequences.
+% }
+% \label{chick_est_mrna_venn}
+% \end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=5in]{mouse-homolog-boxplot.pdf}
+\end{center}
+\caption{
+{\bf Box plots of bit score/length ratio of isoforms and genes that match mouse
+proteins.}
+}
+\label{bitscore}
+\end{figure}
+
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{alt_splice_site.pdf}
+% \end{center}
+% \caption{
+% {\bf Unannotated alternative splice site.} The pipeline detects alternative
+% splices site not annotated in Ensembl and Cufflinks but are supported by ESTs.
+% }
+% \label{alt_splice_site}
+% \end{figure}
+% 
+% \begin{figure}[!ht]
+% \begin{center}
+% \includegraphics[width=5in]{mrna_cuff_gimme.pdf}
+% \end{center}
+% \caption{
+% {\bf mRNAs + Cufflinks + Assembly gene models.} Gimme can combine transcripts
+% from different sources to build gene models.  In this figure, the final gene
+% model includes several isoforms not annotated in the reference gene model.  }
+% \label{mrna_cuff_gimme}
+% \end{figure}
 
 \end{document}
