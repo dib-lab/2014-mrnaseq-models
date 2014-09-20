@@ -620,12 +620,13 @@ variants in organisms that lack a reference genome.
 Both Cufflinks and our pipeline rely on a reference genome; therefore, the
 quality of the genome greatly affects the quality of the gene models.  In this
 study, gene models were built from chicken genome version 2.1 (galGal3), which
-contains ~17 Mb of sequence duplications and missassemblies that were
+contains $\sim17$ Mb of sequence duplications and missassemblies that were
 eliminated in the latest version of genome assembly (galGal4).  Duplications
 and misassemblies lead to spurious splice junctions, which in turn produce
-spurious splice variants. Figure~\ref{bitscore} shows that the median of
-bitscore/length ratios of isoforms is lower than that of genes, suggesting
-poorer alignments of isoforms to mouse protein sequences.
+spurious splice variants. Spurious junctions are non-canonical and a majority
+of them (17.8\%) are in chrUn\_random (sup.Fig.2). Figure~\ref{bitscore} also
+shows that the median of bitscore/length ratios of isoforms is lower than that
+of genes, suggesting poorer alignments of isoforms to mouse protein sequences.
 
 % You may title this section "Methods" or "Models". 
 % "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
@@ -1056,8 +1057,8 @@ junctions in mouse.}
 \end{center}
 \caption{
 {\bf Box plots of bit score/length ratio of isoforms and genes that match mouse
-proteins.}
-}
+proteins.} Only the greatest ratio of isoforms from the same gene is plotted for
+the gene plot. Ratios from every isoform are plotted for the isoform plot.}
 \label{bitscore}
 \end{figure}
 
