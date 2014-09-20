@@ -304,7 +304,7 @@ assembly is also missing some found by Oases-M.
 
 % @CTB is Oases-M meant to work with non-oases-assembled transcripts? is it a
 % general merging tool?
-% @LP I think it's kind of a general merging tool.
+% @LP I think it's kind of a general merging tool based on de Bruijn graph.
 
 \subsection*{Exon graphs can reconstruct putative splice variants}
 
@@ -377,9 +377,10 @@ More than 95\% of our predicted splice junctions have a coverage
 of 4 or higher in our combined mRNAseq data sets, suggesting that they are
 real splice junctions.
 % @CTB I'm slightly bugged by this statement.  Are we right?!
-% @LP the reason I use 4 as a cutoff because there are four samples and if at
-% least one read from each sample map to the junction, it could be real.
-% Apparently, it is not always the case, but that is my simple logic.
+% @LP the main reason I use four reads as a cutoff because there are four
+% samples and if at least one read from each sample map to the junction, it
+% will likely be real.  Apparently, it is not always the case, but that is just
+% my simple logic.
 
 \subsubsection*{Most splice junctions are independently supported}
 
@@ -450,7 +451,7 @@ decreased number of total genes, suggesting that some fragmented genes were
 merged together to form more complete gene structures (e.g. see
 Fig.~\ref{}). The merged gene models recover 49.3\% and 56.2\% of
 splice junctions from ESTs and ENSEMBL respectively
-(Figure~\ref{combined_venn}), which is about 10\% greater than that from
+(Fig.~\ref{combined_venn}), which is about 10\% greater than that from
 corresponding unmerged gene models.
 
 % @CTB Note that these results are, frankly, kind of stunning.  Discuss
@@ -458,17 +459,23 @@ corresponding unmerged gene models.
 
 \subsubsection*{Validating chicken sequences by using mouse homologs}
 
+% @LP Maybe I should add bitscores from Cufflinks so that we can compare with
+% those from Gimme. If the results are similar, we can say that extending
+% Cufflinks with assembly does not affect gene structures in a bad way.
 To validate our predicted isoforms, we extracted putative coding sequences from
 our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan successfully
 translated 28,772 of 34,800 (82.6\%) of our isoforms to protein sequences with
 50 or more amino acids.  We then searched for homologous sequences in mouse
 ENSEMBL, and found that 22,991 (79.9\%) of our isoforms from 12,945 distinct
-genes match mouse proteins at a bit score $\ge1.0$.
-These matches have a bit-score/length ratio greater than 1, which indicates a
-good agreement between chicken and mouse proteins.
+genes match mouse proteins at a bit-score/length $\ge1.0$
+(Fig.~\ref{bitscore}).  A bit-score/length ratio greater than 1 indicates that
+approximately more than half of the protein sequence matches mouse proteins
+well. The results suggest that merging gene models from Cufflinks and {\em de
+novo} aseembly did not disrupt the structure of protein sequences.
 
 % @CTB for discussion: what's surprising about all of this? so many
 % splice variants, etc?  Note we need to go over pickrell paper carefully.
+% @LP I discuss about it below. Hope it helps.
 
 % \section*{Leftover Results text}
 % 
@@ -566,44 +573,59 @@ good agreement between chicken and mouse proteins.
 
 \section*{Discussion}
 
-For organisms with a reference genome and Ensembl annotation, building gene
-models from RNA-Seq reads using Cufflinks with Ensembl gene models as a
-reference guide seems to be a preferable method for gene and isoform expression
-analysis.  However, we find that Ensembl models in chicken are missing a
-substantial number of splice variants found in ESTs and mRNAs, and Cufflinks does
-not recover a number of them.  A previous study by Schulz \emph{et
-al.}\cite{Schulz:2012je} demonstrated that Cufflinks outperformed \emph{de novo}
-assembly in detecting genes and isoforms in Ensembl annotations in mouse.
-We find that Cufflinks almost exclusively finds splice junctions in
-mouse Ensembl gene models, whereas our gene models include splice junctions that are not in
-Ensembl gene models but that {\em are} well supported by ESTs (Figure~\ref{mus_venn}). 
+\subsection*{{\em De novo} assembly should be used to extend gene models from
+Cufflinks}
+For organisms with a reference genome and ENSEMBL annotation, Cufflinks with
+ENSEMBL gene models as a reference guide seems to be a preferable method for
+building gene models. However, we have shown that ENSEMBL models in chicken are
+missing a substantial number of splice variants found in ESTs and mRNAs that
+are also not recovered by Cufflinks. Moreover, results from mouse data suggest
+that Tophat's default parameters may have been tailored to maximize the finding
+of isoforms in ENSEMBL models (Fig.~\ref{mus_venn}), which could lead to
+restricted detection of novel splice variants.
+% 85,512 (97.2\%) of splice
+% junctions found by Cufflinks are also canonical compared to 92.6\% in mouse
+% ENSEMBL gene models. Assuming that mouse data were not selected for splice
+% variants with canonical splice junctions, the percentage of canonical splice
+% sites found by Cufflinks is rather high. 
+Therefore, gene models built from RNA-Seq reads using Cufflinks + ENSEMBL gene
+models alone may not be suitable for genes and isoforms analyses that include
+finding novel genes and splice variants.  {\em De novo} assembly is not tied to
+any specific gene model parameters and does not only detect canonical splice
+sites, thus we recommend that it is used to extend gene models built from
+Cufflinks + ENSEMBL gene models, especially in organisms with relatively
+incomplete ENSEMBL gene models.  Besides {\em de novo} assembly,
+annotation from other sources can also be incorporated to extend Cufflinks models
+using our pipeline.
 
-To build mouse Cufflinks gene models, we used Tophat default parameters claimed
-to be fine-tuned for mammalian RNA-Seq reads, but Cufflinks still poorly
-detected splice junctions not in Ensembl.  This suggests that the parameters may
-have been set based on mammalian Ensembl models, which could limit the
-efficiency of finding novel splice variants in other non-mammal organisms.  In
-contrast, {\em de novo} assembly does not rely on species-specific parameters.
-We therefore recommend that a combination of Cufflinks models and
-transcripts from {\em de novo assembly} be used to build gene models that
-include more splice variants.
+% Moreover, efficiency of finding minor and non-canonical splice sites
+% of Cufflinks is also low, which could cause a problem when Cufflinks is used to
+% construct gene models for organisms with more isoforms with minor and
+% non-canonicla splice sites.
 
-We have also shown that the local assembly could greatly increase sensitivity
-of splice variant detection. However, how the local assembly affects the
-assembly process is not clearly understood.  We speculate that reads with
-multiple alignments may play a significant role in enhancing the assembly of
-splice variants.  Understanding of the mechanisms may lead to a technique that
-can be applied to find splice variants in organisms that lack a reference
-genome.
+\subsection*{Reads with multiple alignments may be key to detection of unique
+splice variants from local assembly}
+We have shown that local assembly greatly increases sensitivity of splice
+variant detection; however, the mechanism is still not clearly understood.  In
+local assembly, reads mapped to each chromosome are assembled separately and
+because Tophat reports multiple alignments for spliced reads, a single spliced
+read from an exon junction present in multiple chromosomes gets assembled
+multiple times. We speculate that this increases the coverage of exon junctions
+found in multiple chromosomes, which help improve the assembly of splice
+variants with low coverage. Further investigation of an inherent mechanism of
+local assembly may lead to a method that increases sensitivity of splice
+variants in organisms that lack a reference genome.
 
-Both Cufflinks and our pipeline rely on a reference genome; therefore,
-the quality of the genome will greatly affect the quality of the gene models.
-In this study gene models were built from chicken genome version 2.1 (galGal3),
-which contains ~17 Mb of sequence duplications and missassemblies
-that were eliminated in the latest version of genome assembly
-(galGal4).  Duplications and misassemblies lead to false splice junctions, which
-in turn produce a large number of splice variants as observed in some
-chromosomes.
+\subsection*{Spurious predicted isoforms are due to poor genome assembly}
+Both Cufflinks and our pipeline rely on a reference genome; therefore, the
+quality of the genome greatly affects the quality of the gene models.  In this
+study, gene models were built from chicken genome version 2.1 (galGal3), which
+contains ~17 Mb of sequence duplications and missassemblies that were
+eliminated in the latest version of genome assembly (galGal4).  Duplications
+and misassemblies lead to spurious splice junctions, which in turn produce
+spurious splice variants. Figure~\ref{bitscore} shows that the median of
+bitscore/length ratios of isoforms is lower than that of genes, suggesting
+poorer alignments of isoforms to mouse protein sequences.
 
 % You may title this section "Methods" or "Models". 
 % "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
@@ -613,27 +635,28 @@ chromosomes.
 \subsection*{Quality trimming of reads}
 Both single- and paired-end reads in this study were trimmed using Condetri
 version 2.1 with default parameters.  In addition, the first 10 bases of each
-reads were trimmed off due to an inconsistency of base-calling.
-
-% (as shown in supplementary figure S?.)
+reads were trimmed off due to an inconsistency of base-calling as shown in
+supplementary Figure 1.
 
 \subsection*{Data}
 
 The mouse RNA-Seq dataset (SRX062280) was downloaded from the Short Read
-Archive.  Chicken RNA-Seq datasets were obtained from
-sequencing of mRNAs from spleen of chicken line 6 and 7.
+Archive.  Chicken RNA-Seq datasets were obtained from sequencing of mRNAs from
+spleens of control and infected chicken (4 days post infection) lines 6 and 7
+using standard Illumina protocol for non-strand specific single-end reads.
 
 \subsection*{Mapping reads to The Genome and Gene Models}
 
 Single and paired-end reads were mapped to the chicken genome by
-Tophat2\cite{Trapnell:2009dp} release 2.0.0 using default parameters without
+Tophat\cite{Trapnell:2009dp} release 1.3.1 using default parameters without
 annotations.  All reads were mapped to cDNA sequences derived from gene models
-by Bowtie2\cite{Langmead:2009fv} with default parameters \texttt{(n=2, l=28,
-e=70, k=1)}.  Reads from the mouse dataset were mapped to the mouse genome
-(mm9) downloaded from Tophat website \texttt{http://tophat.cbcb.umd.edu}.
+by Bowtie\cite{Langmead:2009fv} release 1.0.0 with default parameters Reads from the
+mouse dataset were mapped to the mouse genome (mm9) downloaded from Tophat
+website \texttt{http://tophat.cbcb.umd.edu}.
 
 \subsection*{Global and Local Assembly}
 
+% @LP check the version of tophat
 Reads from each dataset were first assembled separately by global assembly
 without using a reference genome.  In contrast, reads from each dataset were
 first mapped to the chicken genome using Tophat2.  Then only reads mapped to
@@ -643,14 +666,15 @@ Velvet version 1.2.03\cite{Zerbino:2008vu} with default parameters except for
 hash length (k-mer).  A range of k-mer length from 21-31 was used to assemble
 reads from chicken data and k-mer length 27 was used to assemble reads from
 mouse data.  Lastly, transcripts from both methods were assembled by Oases
-version 0.2.06\cite{Schulz:2012je}.  A poly-A tail, short transcripts and
-transcripts with low complexity are removed by seqclean~\cite{seqclean} with
-default parameters.  Redundant transcripts are removed by cd-hit-est from the
-CD-HIT suite\cite{Li:2006hr}.  A substantial number of transcripts are removed
-at this step, which facilitates gene model construction process.
+version 0.2.06\cite{Schulz:2012je}.
 
-We obtained 339,199 transcripts, of which 315,998 transcripts (93.2\%) mapped
-to chicken genome.  Only transcripts mapped to chicken genome are used to build
+A poly-A tail, short transcripts and transcripts with low complexity are
+removed by SeqClean~\cite{seqclean} with default parameters.  Redundant
+transcripts are removed by \texttt{cd-hit-est} from the CD-HIT
+suite\cite{Li:2006hr} release 4.5.4.  A substantial number of transcripts are
+removed at this step, which facilitates gene model construction process.  We
+obtained 339,199 transcripts, of which 315,998 transcripts (93.2\%) mapped to
+chicken genome.  Only transcripts mapped to chicken genome are used to build
 gene models.
 
 \subsection*{Gene Model Construction}
@@ -659,8 +683,7 @@ gene models.
 
 Figure~\ref{overall_pipeline} depicts an overall gene model construction
 pipeline.  Transcripts of all datasets from local and global assembly were
-mapped to the chicken genome using BLAT\cite{Kent:2002tv} \texttt{(-t=dna -q=dna
--noHead -out=psl -mask=lower -extendThroughN -dots=1000)}.  Alignments and gaps
+mapped to the chicken genome using BLAT\cite{Kent:2002tv}. Alignments and gaps
 from BLAT outputs are considered exons and introns respectively.  Optionally,
 data from other sources (ESTs, RefGenes, etc.) can be incorporated with
 transcripts from the assembly to improve gene models.  All transcripts are then
@@ -668,10 +691,7 @@ assembled using Gimme, a program that assembles transcripts based on their
 alignments to the reference genome.  An algorithm for assembling transcripts is
 described below.  A maximum set of transcripts obtained from Gimme are then
 reduced to only a minimum set of transcripts that contain all splice junctions
-and untranslated regions (UTRs).  After that, transcripts that are highly
-similar ($>99\%$) are clustered and removed by CD-HIT version
-4.5.6\cite{Li:2006hr}.  Parameters for clustering are \texttt{-n 10, -r 0 and -c
-0.99}.  Only a representative of each cluster is kept in gene models.
+and untranslated regions (UTRs).
 
 \subsubsection*{Algorithm}
 
@@ -684,15 +704,14 @@ that handles incomplete exons and fragmented transcripts and constructs a
 maximum assembly of gene models.
 
 The algorithm first builds an intron graph using introns as nodes.  Each intron
-contains exons one of whose splice sites perfectly match intron boundaries.
-Exons are considered incomplete and eliminated if they locate at the $3'$ or
-$5'$ end of the transcripts and they are not the largest exons.
-% @CTB ???
-  ,
-Fig.~\ref{algorithm}).  Transcripts were then grouped into the same gene if
-they have at least one intron or exon in common.  Then, a splice graph composed
-of exons is created and structures of isoforms are derived from traversing
-paths in the splice graph.  Gimme is open-source and available at
+contains exons whose splice sites perfectly match intron boundaries. At the
+$5\prime$ and the $3\prime$ ends, some exons may be smaller than others due to
+incomplete assembly (supp. Fig.??). Only the largest exons are kept to ensure
+that the transcript has the most complete exons (Fig.~\ref{algorithm}).
+Transcripts were then grouped into the same gene if they have at least one
+intron or exon in common.  Then, a splice graph composed of exons is created
+and structures of isoforms are derived from traversing paths in the splice
+graph.  Gimme is open-source and available at
 \texttt{https://github.com/ged-lab/gimme}.
 
 \subsection*{Protein sequence translation}
@@ -705,10 +724,15 @@ than 50 bp are included in the analysis.
 \subsection*{Finding unique sequences between datasets}
 
 To identify unique sequences from two datasets, a set of 20-mers is created for
-both datasets using khmer\cite{khmer} (@CTB what script? I may have just removed it :).  Then, 20-mers from a query dataset are
+both datasets using khmer\cite{} . Then, 20-mers from a query dataset are
 compared with 20-mers from the target dataset.  The sequence is considered
 unique if more than 90\% of 20-mers in the query is unique.  Any unique region
 shorter than 300 bp is ignored.
+% @CTB what script? I may have just removed it.
+% @LP The script is named assembly-diff.py. I have it in my repo. It is a
+% modified version of yours.
+
+% @LP how do I cite khmer? Should I cite QP paper?
 
 \subsection*{Sequence homology analysis}
 
@@ -735,6 +759,10 @@ then merged together using Cuffmerge.
 Expressed sequence tags (ESTs) and mRNAs were downloaded from the UCSC genome
 website.  The database was loaded from GENBANK on 1 January 2014.  Sequences
 were aligned to the chicken genome using BLAT.
+
+\subsection*{Pipeline for the study}
+The pipeline, scripts and instructions for reproducing this study are open
+source and available at \texttt{http://github.com/likit/gimme-paper}.
 
 % Do NOT remove this, even if you are not including acknowledgments
 %\section*{References}
