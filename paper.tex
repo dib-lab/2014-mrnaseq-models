@@ -748,7 +748,7 @@ isoform plot.
 Reads from each dataset were mapped to transcripts from the gene models using
 Bowtie version 1.0.0. The parameter is set for Bowtie to report up to 100
 alignments per read.  Reads mapped across exon junctions from all datasets were
-counted using Samtools\cite{Li:2009vz} and Pysam\cite{pysam}.
+counted using Samtools\cite{li2009sequence} and Pysam\cite{pysam}.
 
 \subsection*{Sequence assembly using Cufflinks}
 Reads are mapped to a genome sequence using Tophat.  Gene models are built from
@@ -1015,9 +1015,13 @@ detect a large number of unannotated splice junctions.}
 \includegraphics[width=5in]{mouse_venn.pdf}
 \end{center}
 \caption{
-{\bf Splice sites in mouse Ensembl gene models, Cufflinks and the \emph{de novo}
-assembly pipeline.} In contrast to chicken datasets, Cufflinks and the pipeline
-detects the similar amount of non-overlapped annotated junctions.}
+{\bf Splice sites in mouse Ensembl gene models, Cufflinks and the \emph{de
+novo} assembly pipeline.} In contrast to chicken datasets, 85,160 (96.8\%) of
+splice junctions found by Cufflinks are annotated in mouse ENSEMBL models. The
+higher percentage of ENSEMBL splice junctions found by Cufflinks may be a
+result of more complete ENSEMBL gene models. While Gimme can detect the similar
+number of ENSEMBL splice junctions, it detects many more non-ENSEMBL splice
+junctions in mouse.}
 \label{mus_venn}
 \end{figure}
 
