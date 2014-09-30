@@ -453,23 +453,23 @@ corresponding unmerged gene models.
 
 \subsubsection*{Validating chicken sequences by using mouse homologs}
 
-% @LP Maybe I should add bitscores from Cufflinks so that we can compare with
-% those from Gimme. If the results are similar, we can say that extending
-% Cufflinks with assembly does not affect gene structures in a bad way.
 To validate our predicted isoforms, we extracted putative coding sequences from
 our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan successfully
-translated 28,772 of 34,800 (82.6\%) of our isoforms to protein sequences with
-50 or more amino acids.  We then searched for homologous sequences in mouse
-ENSEMBL, and found that 22,991 (79.9\%) of our isoforms from 12,945 distinct
-genes match mouse proteins at a bit-score/length $\ge1.0$
-(Fig.~\ref{bitscore}).  A bit-score/length ratio greater than 1 indicates that
-approximately more than half of the protein sequence matches mouse proteins
-well. The results suggest that merging gene models from Cufflinks and {\em de
-novo} aseembly did not disrupt the structure of protein sequences.
+translated 28,772 of 34,800 (82.6\%) of isoforms from Gimme models to protein
+sequences with 50 or more amino acids.  We then searched for homologous
+sequences in mouse ENSEMBL, and found that 22,460 (77.7\%) and 22,991 (79.9\%)
+of isoforms from Cufflinks and Gimme match mouse proteins at a bit-score/length
+$\ge1.0$(Fig.~\ref{bitscore}).  The number of distinct genes are 16,731 and
+12,945 from Cufflinks and Gimme respectively.  A bit-score/length ratio greater
+than 1 indicates that approximately more than half of the protein sequence
+matches mouse proteins well. The sizes of genes and isoforms from Gimme are
+slightly greater than those from Cufflinks while the bitscore/length ratios are
+slightly lower suggesting that transcripts from assembly are more complete.
 
-% @CTB for discussion: what's surprising about all of this? so many
-% splice variants, etc?  Note we need to go over pickrell paper carefully.
-% @LP I discuss about it below. Hope it helps.
+
+% @CTB for discussion: what's surprising about all of this? so many splice
+% variants, etc?  Note we need to go over pickrell paper carefully.  @LP I
+% discuss about it below. Hope it helps.
 
 % \section*{Leftover Results text}
 % 
@@ -640,7 +640,7 @@ Archive.  Chicken RNA-Seq datasets were obtained from sequencing of mRNAs from
 spleens of control and infected chicken (4 days post infection) lines 6 and 7
 using standard Illumina protocol for non-strand specific single-end reads.
 
-\subsection*{Mapping reads to The Genome and Gene Models}
+\subsection*{Mapping Reads to The Genome and Gene Models}
 
 Single and paired-end reads were mapped to the chicken genome by
 Tophat\cite{Trapnell:2009dp} release 1.3.1 using default parameters without
@@ -676,7 +676,7 @@ gene models.
 
 \subsubsection*{Overall Pipeline}
 
-Figure~\ref{overall_pipeline} depicts an overall gene model construction
+Figure~\ref{img:pipeline} depicts an overall gene model construction
 pipeline.  Transcripts of all datasets from local and global assembly were
 mapped to the chicken genome using BLAT\cite{Kent:2002tv}. Alignments and gaps
 from BLAT outputs are considered exons and introns respectively.  Optionally,
@@ -859,42 +859,6 @@ Global + Local + Cufflinks (w/Ensembl) & 24,915 & 60,976 \\
 \end{table}
 
 \section*{Figure Legends}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{overall_pipeline.pdf}
-\end{center}
-\caption{
-{\bf Gene model construction pipeline.} Transcripts are obtained from two
-assembly methods -- global and local assembly.  Transcripts are aligned to the
-chicken genome by BLAT\@. Gimme then constructs gene models based on alignments
-of transcripts.  }
-\label{overall_pipeline}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{local_assembly}
-\end{center}
-\caption{
-{\bf Local Assembly Pipeline.}
-Reads are first mapped to a chicken genome.  Then only mapped reads are
-assembled by Velvet and Oases.
-}
-\label{local_assembly}
-\end{figure}
-
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=5in]{algorithm.pdf}
-\end{center}
-\caption{
-{\bf Intron and exon graphs.} Each intron connects to exons whose splice
-junctions match it boundary.  Some exons are excluded from the final gene model
-if they are incomplete (exon 3a,b).  Introns sharing at least one exon are
-grouped together.  Then an exon graph is made using exons as nodes.
-}
-\label{algorithm}
-\end{figure}
 
 \begin{figure}[!ht]
 \begin{center}
@@ -905,7 +869,6 @@ grouped together.  Then an exon graph is made using exons as nodes.
 }
 \label{global_vs_local}
 \end{figure}
-
 
 % \begin{figure}[!ht]
 % \begin{center}
@@ -1078,4 +1041,49 @@ the gene plot. Ratios from every isoform are plotted for the isoform plot.}
 % \label{mrna_cuff_gimme}
 % \end{figure}
 
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=5in]{pipeline.pdf}
+\end{center}
+\caption{
+{\bf Gene model construction pipeline.}
+Transcripts are obtained from two assembly methods -- global and
+local assembly. Transcripts with low complexity are removed and
+poly(A) tails are trimmed by SeqClean. Transcripts are aligned to
+the chicken genome using BLAT and alignments are then used by
+Gimme to construct gene models. Gene models from Cufflinks and
+other sources can also be incorporated to build the gene models.
+}
+\label{img:pipeline}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=5in]{local_assembly.pdf}
+\end{center}
+\caption{
+{\bf Local assembly pipeline.}
+Reads are first mapped to a chicken genome by Tophat.  Then reads
+mapped to each chromosome are assembled by Velvet and Oases
+separately.
+}
+\label{local_assembly}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=5in]{algorithm.pdf}
+\end{center}
+\caption{
+{\bf Intron and exon graph.}
+Introns sharing at least one exon are grouped together, then an
+exon graph is constructed with exons from all introns as nodes.
+Exons are excluded from the final gene model if they are smaller
+than other exons sharing the same intron (exon 1a, 3a and 3b).
+Edges of the exon graph (red arrow) are implied from the
+connections of introns (blue arrow).  A transcript is constructed
+from concatenation of all unique exons in the graph.
+}
+\label{algorithm}
+\end{figure}
 \end{document}
