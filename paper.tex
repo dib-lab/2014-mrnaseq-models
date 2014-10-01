@@ -352,7 +352,7 @@ verification of a splice junction's presence in a transcript.
 
 Of 105,461 splice junctions from the gene models, 2,057 (2\%) junctions have no
 spliced reads and only 4,626 (4.4\%) junctions have fewer than 4 spliced reads
-(Fig.~\ref{cdf_splice}).  Note that 710 junctions are in chrUn\_random contigs,
+(Figure~\ref{cdf_splice}).  Note that 710 junctions are in chrUn\_random contigs,
 which may have a great number of genome missassemblies. The number of junctions
 outside random chromosomes with no reads is 1,347/99,986 (1.3\%).
 % @CTB how do you get junctions with no spliced reads!?
@@ -379,7 +379,7 @@ real splice junctions.
 \subsubsection*{Most splice junctions are independently supported}
 
 Of the 105,461 splice junctions in our gene models, 83,560 (79.2\%) are
-supported by ESTs or mRNAs from Genbank (Fig.~\ref{chick_est_venn}).  This is
+supported by ESTs or mRNAs from Genbank (Figure~\ref{chick_est_venn}).  This is
 especially surprising since our mRNAseq data is from spleen, and most of the
 publicly available ESTs or mRNAs are from other tissues. 16,909 splice junctions
 are found by either Cufflinks or our gene models, but not both, suggesting a variation in
@@ -422,7 +422,7 @@ splice junctions.
 
 When we apply Gimme and Cufflinks to a publicly available mouse mRNAseq data
 set, Gimme and Cufflinks recover approximately the same number of splice
-junctions already known from ENSEMBL (Figure ~\ref{mus_venn}).  However, Gimme
+junctions already known from ENSEMBL (Figure~\ref{mus_venn}).  However, Gimme
 recovers a substantial number of additional splice variants beyond Cufflinks and
 ENSEMBL both.
 
@@ -443,9 +443,9 @@ predictions.  We therefore used Gimme to incorporate the Cufflinks models to
 global and local assembly, Table.~\ref{genes_transcripts}.  This resulted in a
 decreased number of total genes, suggesting that some fragmented genes were
 merged together to form more complete gene structures (e.g. see
-Fig.~\ref{}). The merged gene models recover 49.3\% and 56.2\% of
+Figure~\ref{}). The merged gene models recover 49.3\% and 56.2\% of
 splice junctions from ESTs and ENSEMBL respectively
-(Fig.~\ref{combined_venn}), which is about 10\% greater than that from
+(Figure~\ref{combined_venn}), which is about 10\% greater than that from
 corresponding unmerged gene models.
 
 % @CTB Note that these results are, frankly, kind of stunning.  Discuss
@@ -453,19 +453,38 @@ corresponding unmerged gene models.
 
 \subsubsection*{Validating chicken sequences by using mouse homologs}
 
-To validate our predicted isoforms, we extracted putative coding sequences from
-our gene models with ESTScan\cite{Iseli:1999vd}.  ESTScan successfully
-translated 28,772 of 34,800 (82.6\%) of isoforms from Gimme models to protein
-sequences with 50 or more amino acids.  We then searched for homologous
-sequences in mouse ENSEMBL, and found that 22,460 (77.7\%) and 22,991 (79.9\%)
-of isoforms from Cufflinks and Gimme match mouse proteins at a bit-score/length
-$\ge1.0$(Fig.~\ref{bitscore}).  The number of distinct genes are 16,731 and
-12,945 from Cufflinks and Gimme respectively.  A bit-score/length ratio greater
-than 1 indicates that approximately more than half of the protein sequence
-matches mouse proteins well. The sizes of genes and isoforms from Gimme are
-slightly greater than those from Cufflinks while the bitscore/length ratios are
-slightly lower suggesting that transcripts from assembly are more complete.
+To validate our predicted isoforms, we extracted putative coding
+sequences from our gene models with ESTScan\cite{Iseli:1999vd}.
+ESTScan successfully translated 28,772 of 34,800 (82.6\%) of
+isoforms from Gimme models and 28,918 of 38,307 (75.5\%) of
+isoforms from Cufflinks to protein sequences with 50 or more
+amino acids.  We then searched for homologous sequences in mouse
+ENSEMBL, and found that 22,991 (79.9\%) and 22,460 (77.6\%) of
+isoforms from Gimme and Cufflinks match mouse proteins at a
+bit-score/length $\ge1.0$ (Figure~\ref{bitscore}A).  The number of
+distinct genes are 12,945 and 16,731 from Gimme and Cufflinks
+respectively.  A bit-score/length ratio greater than 1.0 indicates
+that approximately more than half of the protein sequence matches
+mouse proteins well.
 
+\subsubsection*{Merged gene models have more complete
+transcripts}
+
+The size of genes and isoforms from Gimme are slightly greater
+than those from Cufflinks (Figure~\ref{bitscore}B) while the
+bit-score/length ratios are slightly lower. To validate that
+Gimme software can be used to combine different sets of gene
+models to create an improved set of gene models, we used our
+software to combine Gimme and Cufflinks models to create merged
+gene models and found that the size of transcripts from merged
+gene models are greater than those from either Cufflinks or Gimme
+models.  Total of 38,535 of 45,793 (84.2\%) isoforms were
+successfully translated to protein sequences with 50 or more
+amino acids and 31,765 (82.4\%) from 13,958 genes matched mouse
+proteins. A majority of genes and isoforms also have a
+bit-score/length ratio greater than 1.0.  This suggests that
+merging Cufflinks and Gimme models creates more complete gene
+models.
 
 % @CTB for discussion: what's surprising about all of this? so many splice
 % variants, etc?  Note we need to go over pickrell paper carefully.  @LP I
@@ -575,7 +594,7 @@ building gene models. However, we have shown that ENSEMBL models in chicken are
 missing a substantial number of splice variants found in ESTs and mRNAs that
 are also not recovered by Cufflinks. Moreover, results from mouse data suggest
 that Tophat's default parameters may have been tailored to maximize the finding
-of isoforms in ENSEMBL models (Fig.~\ref{mus_venn}), which could lead to
+of isoforms in ENSEMBL models (Figure~\ref{mus_venn}), which could lead to
 restricted detection of novel splice variants.
 % 85,512 (97.2\%) of splice
 % junctions found by Cufflinks are also canonical compared to 92.6\% in mouse
@@ -656,7 +675,7 @@ Reads from each dataset were first assembled separately by global assembly
 without using a reference genome.  In contrast, reads from each dataset were
 first mapped to the chicken genome using Tophat2.  Then only reads mapped to
 the genome were assembled by chromosome in the local assembly
-(Fig.~\ref{local_assembly}).  Global and local assembly was performed using
+(Figure~\ref{local_assembly}).  Global and local assembly was performed using
 Velvet version 1.2.03\cite{Zerbino:2008vu} with default parameters except for
 hash length (k-mer).  A range of k-mer length from 21-31 was used to assemble
 reads from chicken data and k-mer length 27 was used to assemble reads from
@@ -701,8 +720,8 @@ maximum assembly of gene models.
 The algorithm first builds an intron graph using introns as nodes.  Each intron
 contains exons whose splice sites perfectly match intron boundaries. At the
 $5\prime$ and the $3\prime$ ends, some exons may be smaller than others due to
-incomplete assembly (supp. Fig.??). Only the largest exons are kept to ensure
-that the transcript has the most complete exons (Fig.~\ref{algorithm}).
+incomplete assembly (supp.Fig.??). Only the largest exons are kept to ensure
+that the transcript has the most complete exons (Figure~\ref{algorithm}).
 Transcripts were then grouped into the same gene if they have at least one
 intron or exon in common.  Then, a splice graph composed of exons is created
 and structures of isoforms are derived from traversing paths in the splice
@@ -928,8 +947,10 @@ Global + Local + Cufflinks (w/Ensembl) & 24,915 & 60,976 \\
 \includegraphics[width=5in]{mapped-reads.pdf}
 \end{center}
 \caption{
-{\bf Cumulative counts of splice junctions with spliced reads from both single-
-and paired-end data from Cufflinks and Gimme models.}
+{\bf Percentages of reads mapped to the gene models from Ensembl
+and Gimme.}
+Reads were mapped to transcripts derived from the gene models
+using Bowtie.
 }
 \label{mapped-reads}
 \end{figure}
@@ -951,6 +972,10 @@ paired-end data.}
 \end{center}
 \caption{
     {\bf Splice junctions supported by ESTs or mRNAs.}
+    Both Cufflinks and Gimme detect unique splice junctions
+    supported by ESTs + mRNAs. A large number of splice junctions
+    in ESTs + mRNAs are not found in either Gimme or Cufflinks
+    because ESTs + mRNAs contain transcripts for other tissues.
 }
 \label{chick_est_venn}
 \end{figure}
@@ -960,10 +985,11 @@ paired-end data.}
 \includegraphics[width=5in]{chick_venn.pdf}
 \end{center}
 \caption{
-{\bf Splice sites in chicken Ensembl gene models detected by Cufflinks and the
-{\em de novo} assembly pipeline.} Cufflinks detects many annotated isoforms
-that are not detected by the pipeline.  The figure also shows that both methods
-detect a large number of unannotated splice junctions.}
+{\bf Splice sites in chicken Ensembl gene models detected by
+Cufflinks and Gimme}
+Cufflinks detects many annotated isoforms that are not detected
+by the pipeline.  The figure also shows that both methods detect
+a large number of unannotated splice junctions.}
 \label{chick_venn}
 \end{figure}
 
@@ -973,12 +999,12 @@ detect a large number of unannotated splice junctions.}
 \includegraphics[width=5in]{mouse_venn.pdf}
 \end{center}
 \caption{
-{\bf Splice sites in mouse Ensembl gene models, Cufflinks and the \emph{de
-novo} assembly pipeline.} In contrast to chicken datasets, 85,160 (96.8\%) of
-splice junctions found by Cufflinks are annotated in mouse ENSEMBL models. The
-higher percentage of ENSEMBL splice junctions found by Cufflinks may be a
-result of more complete ENSEMBL gene models. While Gimme can detect the similar
-number of ENSEMBL splice junctions, it detects many more non-ENSEMBL splice
+{\bf Splice sites in mouse Ensembl gene models, Cufflinks and
+Gimme pipeline.}
+In contrast to chicken datasets, 85,160 (96.8\%) of splice
+junctions found by Cufflinks are annotated in mouse ENSEMBL
+models. While Gimme can detect the similar number of ENSEMBL
+splice junctions, it detects many more non-ENSEMBL splice
 junctions in mouse.}
 \label{mus_venn}
 \end{figure}
@@ -989,9 +1015,9 @@ junctions in mouse.}
 \includegraphics[width=5in]{cuff_gimme_junctions_venn.pdf}
 \end{center}
 \caption{
-    {\bf Splice junctions found in merged models.} Merged models (B) find more
-    splice junctions in ENSEMBL and ESTs + mRNAs than Cufflinks models only (A).
-}
+{\bf Splice junctions found in merged models.} Merged models (B)
+find more splice junctions in ENSEMBL and ESTs + mRNAs than
+Cufflinks models only (A).}
 \label{combined_venn}
 \end{figure}
 
