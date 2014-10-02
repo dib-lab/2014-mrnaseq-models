@@ -128,7 +128,7 @@ small number of genes and isoforms due to the high cost and low throughput
 of sequencing expressed sequence tags (ESTs) and full-length cDNA
 libraries.  RNA sequencing (RNA-Seq) using deep short-read sequencing
 has been used successfully in many studies to gain unprecedented
-insight into the complexity of transcriptomes (@cite).
+insight into the complexity of transcriptomes~\cite{nagalakshmi2008transcriptional,mortazavi2008mapping,pan2008deep,Wang:2008ea}.
 It has been estimated that, in human, $92-94$\% of multiexon genes
 undergo alternative splicing and different isoforms are expressed in
 different tissues\cite{Wang:2008ea}.  This suggests that even in human
@@ -143,7 +143,7 @@ Despite the small size of sequencing reads, several studies have
 detected novel splice junctions based on alignment of reads spanning
 putative exon junctions.  To map reads across exon junctions,
 reads are split into two parts and each part is mapped to the genome
-independently (@cite).  A splice junction is then identified based on
+independently.  A splice junction is then identified based on
 alignments of each half of a read that falls between two exons at
 exon-intron boundaries.  With this approach, Wang \emph{et al} have
 identified a large number of splice junctions that are not annotated
@@ -236,12 +236,12 @@ that were present in the global assembly (Table~\ref{unique_sequences},
 
 and Table~\ref{unique_sequences_matched_mouse}); this is probably due to the
 incomplete nature of the current chicken genome assembly, which is lacking
-approximately 5\% of its true gene content (@cite).  Interestingly, over a
-hundred regions were present {\em only} in the local assemblies,
-suggesting that the local assemblies might be recovering additional exons.
-Significant numbers of unique regions from both global and local assemblies
-showed homology to the mouse genome, indicating that at least some of these
-unique sequences represented real sequence content.
+approximately 5\% of its true gene content~\cite{hillier2004sequence}.
+Interestingly, over a hundred regions were present {\em only} in the local
+assemblies, suggesting that the local assemblies might be recovering additional
+exons.  Significant numbers of unique regions from both global and local
+assemblies showed homology to the mouse genome, indicating that at least some
+of these unique sequences represented real sequence content.
 Figure~\ref{global_vs_local} shows an example of different isoforms detected by
 the two assembly methods.
 
@@ -332,10 +332,9 @@ More importantly, we also mapped paired-end reads from technical replicates to
 the same gene models, and found that more than 74\% of the paired-ends mapped
 concordantly the gene models.  Most of the reads that did not map were either
 highly erroneous or contained low-complexity artifactual sequence that probably
-originated from sample processing and reverse transcription (@cite).  Thus the
-merged gene models produced by Gimme represent the significant majority of the
-assemblable data.
-
+originated from sample processing and reverse
+transcription~\cite{martin2011next}.  Thus the merged gene models produced by
+Gimme represent the significant majority of the assemblable data.
 
 % @CTB do we have something we can cite for typical mapping?  Maybe Trinity paper?
 % How about a citation that suggests that there's a lot of crap in mRNAseq?
@@ -398,7 +397,7 @@ another reference-based approach to building gene models from mRNAseq
 data\cite{Trapnell:2010kd}.  We also compared the results from both
 methods to the ENSEMBL gene annotations, which are produced by a
 pipeline that incorporates de novo gene prediction and homology-based
-approaches as well as expression data (@cite).
+approaches as well as expression data~\cite{flicek2013ensembl}.
 
 Cufflinks finds 92,077 splice junctions, and Gimme finds 105,461 splice
 junctions.  80,964 of them are in common (Figure~\ref{chick_venn}). Both
