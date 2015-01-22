@@ -1,14 +1,14 @@
-all: paper supplement
+all: 2014-gimme.pdf supplement.pdf
 
 clean:
-	rm paper.pdf *.aux
+	rm 2014-gimme.pdf *.aux
 	rm supplement.pdf
 
-paper: paper.tex
-	pdflatex paper
-	pdflatex paper
-	bibtex paper
-	pdflatex paper
+2014-gimme.pdf: 2014-gimme.tex
+	pdflatex 2014-gimme
+	bibtex 2014-gimme
+	pdflatex 2014-gimme
+	pdflatex 2014-gimme
 
-supplement: supplement.tex
+supplement.pdf: supplement.tex
 	pdflatex supplement
